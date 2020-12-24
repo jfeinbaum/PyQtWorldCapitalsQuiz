@@ -8,4 +8,5 @@ Instructions:
   2. Run `python wcg.py` to start the application.
   3. Guess the capital of each randomly selected country until the entire table is filled.
  
-`countriescapitals.txt` contains the answer key with alternate spellings. Answers are case insensitive.
+`countriescapitals.txt` contains the answer key with alternate spellings. 
+Answers are case insensitive.
