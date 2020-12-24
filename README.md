@@ -1,4 +1,6 @@
 # World Capitals Quiz
+## created by Jake Feinbaum
+  
 A quiz to name all the capital cities of the world, built in PyQt5.
 
 Instructions:
