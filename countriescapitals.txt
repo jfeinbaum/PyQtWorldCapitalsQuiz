@@ -3,7 +3,7 @@ Albania: Tirana
 Algeria: Algiers
 Andorra: Andorra la Vella
 Angola: Luanda
-Antigua and Barbuda: Saint John's; Saint Johns; St. John's; St. Johns; St John's; St Johns 
+Antigua and Barbuda: Saint John's; Saint Johns; St. John's; St. Johns; St John's; St Johns
 Argentina: Buenos Aires
 Armenia: Yerevan
 Australia: Canberra
@@ -43,7 +43,7 @@ Cyprus: Nicosia
 Czech Republic: Prague
 Democratic Republic of the Congo: Kinshasa
 Denmark: Copenhagen
-Djibouti: Djibouti
+Djibouti: Djibouti; Djibouti City
 Dominica: Roseau
 Dominican Republic: Santo Domingo
 East Timor: Dili
