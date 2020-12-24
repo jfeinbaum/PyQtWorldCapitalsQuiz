@@ -53,6 +53,7 @@ El Salvador: San Salvador
 Equatorial Guinea: Malabo
 Eritrea: Asmara
 Estonia: Tallinn
+Eswatini: Mbabane
 Ethiopia: Addis Ababa
 Fiji: Suva
 Finland: Helsinki
@@ -117,6 +118,7 @@ Montenegro: Podgorica
 Morocco: Rabat
 Mozambique: Maputo
 Myanmar: Naypyidaw
+Namibia: Windhoek
 Nauru: Yaren
 Nepal: Kathmandu
 Netherlands: Amsterdam
@@ -164,7 +166,6 @@ Spain: Madrid
 Sri Lanka: Sri Jayawardenapura Kotte
 Sudan: Khartoum
 Suriname: Paramaribo
-Swaziland: Mbabane
 Sweden: Stockholm
 Switzerland: Bern
 Syria: Damascus
@@ -190,6 +191,6 @@ Vanuatu: Port Vila
 Vatican City: Vatican City
 Venezuela: Caracas
 Vietnam: Hanoi
-Yemen: Sanaa
+Yemen: Sana'a; Sanaa
 Zambia: Lusaka
 Zimbabwe: Harare
