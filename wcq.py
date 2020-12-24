@@ -20,6 +20,7 @@ def get_legend():
     return legend
 
 
+
     
 class WCQ(qtw.QWidget):
 
@@ -40,6 +41,7 @@ class WCQ(qtw.QWidget):
         self.country_label.setFont(qtg.QFont('Arial Black', 16))
         self.get_new_country()
         self.line_input = qtw.QLineEdit()
+        self.line_input.setFont(qtg.QFont('Arial',12))
         self.line_input.returnPressed.connect(self.handle_input)
 
         
@@ -50,7 +52,10 @@ class WCQ(qtw.QWidget):
         self.table.setHorizontalHeaderLabels(['Country', 'Capital'])
         self.table.setVerticalHeaderLabels(['' for x in self.countries])
         for i, country in enumerate(self.countries):
-            self.table.setItem(i, 0, qtw.QTableWidgetItem(country))
+            country_cell = qtw.QTableWidgetItem(country)
+            country_cell.setFlags(country_cell.flags() & ~qtc.Qt.ItemIsEditable)
+            country_cell.setFlags(country_cell.flags() & ~qtc.Qt.ItemIsSelectable)
+            self.table.setItem(i, 0, country_cell)
 
             
  
@@ -75,7 +80,10 @@ class WCQ(qtw.QWidget):
         if guess in [cap.lower() for cap in self.legend[country]]:
             row_index = self.countries.index(country)
             capital = self.legend[country][0]
-            self.table.setItem(row_index, 1, qtw.QTableWidgetItem(capital))
+            capital_cell = qtw.QTableWidgetItem(capital)
+            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsEditable)
+            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
+            self.table.setItem(row_index, 1, capital_cell)
             self.countries_remaining.remove(country)
 
             
