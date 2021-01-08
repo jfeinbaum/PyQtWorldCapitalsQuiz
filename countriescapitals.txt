@@ -188,7 +188,7 @@ United States of America: Washington, D.C.; DC; D.C.; Washington DC; Washington 
 Uruguay: Montevideo
 Uzbekistan: Tashkent
 Vanuatu: Port Vila
-Vatican City: Vatican City
+Vatican City: Vatican City; Vatican
 Venezuela: Caracas
 Vietnam: Hanoi
 Yemen: Sana'a; Sanaa
