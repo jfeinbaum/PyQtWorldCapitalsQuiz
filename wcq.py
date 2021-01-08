@@ -1,8 +1,11 @@
 import sys
 import random
+from time import time
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
+
+#from qgis.core import *
 
 '''
 Reads .txt file, returns a dictionary
@@ -20,7 +23,21 @@ def get_legend():
     return legend
 
 
-
+def get_times():
+    times = {}
+    fp = open('countrytimes.txt', 'r')
+    for line in fp.readlines():
+        country, time_str = line.split(': ')
+        time = float(time_str.strip('\n'))
+        times[country] = time
+    fp.close()
+    return times
+    
+def save_times(times):
+    fp = open('countrytimes.txt', 'w')
+    for country, time in times.items():
+        fp.write(country + ': '+ str(time) +'\n')
+    fp.close()
     
 class WCQ(qtw.QWidget):
 
@@ -32,6 +49,9 @@ class WCQ(qtw.QWidget):
         self.legend = get_legend()
         self.countries = list(self.legend.keys())
         self.countries_remaining = list(self.legend.keys())
+        
+        self.times = get_times()
+        self.start_time = 0
 
         self.remaining_label = qtw.QLabel()
         self.remaining_label.setFont(qtg.QFont('Arial', 12))
@@ -78,6 +98,13 @@ class WCQ(qtw.QWidget):
         country = self.country_label.text()
 
         if guess in [cap.lower() for cap in self.legend[country]]:
+        
+            elapsed_time = time() - self.start_time
+            if self.times[country] == 0:
+                self.times[country] = elapsed_time
+            else:
+                self.times[country] = (self.times[country] + elapsed_time) / 2
+            
             row_index = self.countries.index(country)
             capital = self.legend[country][0]
             capital_cell = qtw.QTableWidgetItem(capital)
@@ -85,6 +112,8 @@ class WCQ(qtw.QWidget):
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
             self.table.setItem(row_index, 1, capital_cell)
             self.countries_remaining.remove(country)
+            
+            
 
             
             
@@ -102,11 +131,13 @@ class WCQ(qtw.QWidget):
     def get_new_country(self):
         country = random.choice(self.countries_remaining)
         self.country_label.setText(country)
+        self.start_time = time()
         
     def win(self):
         self.country_label.setText('YOU WIN!')
         self.line_input.disconnect()
         self.line_input.returnPressed.connect(self.line_input.clear)
+        save_times(self.times)
         
 
         
