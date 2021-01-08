@@ -100,10 +100,7 @@ class WCQ(qtw.QWidget):
         if guess in [cap.lower() for cap in self.legend[country]]:
         
             elapsed_time = time() - self.start_time
-            if self.times[country] == 0:
-                self.times[country] = elapsed_time
-            else:
-                self.times[country] = (self.times[country] + elapsed_time) / 2
+            self.times[country] = (self.times[country] + elapsed_time) / 2
             
             row_index = self.countries.index(country)
             capital = self.legend[country][0]
