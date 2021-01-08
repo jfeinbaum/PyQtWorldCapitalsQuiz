@@ -9,6 +9,7 @@ Instructions:
   3. Guess the capital of each randomly selected country until the entire table is filled.
  
 `countriescapitals.txt` contains the answer key with alternate spellings. 
+
 `countrytimes.txt` contains the time elapsed to correctly guess each country's capital.
 
 Answers are case insensitive.
