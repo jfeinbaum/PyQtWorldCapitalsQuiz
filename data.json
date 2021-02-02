@@ -1,0 +1,1400 @@
+{
+    "Afghanistan": {
+        "display": "Kabul",
+        "allowed": [
+            "Kabul"
+        ],
+        "time": 2.0758708715438843
+    },
+    "Albania": {
+        "display": "Tirana",
+        "allowed": [
+            "Tirana"
+        ],
+        "time": 1.8668904304504395
+    },
+    "Algeria": {
+        "display": "Algiers",
+        "allowed": [
+            "Algiers"
+        ],
+        "time": 1.3723481893539429
+    },
+    "Andorra": {
+        "display": "Andorra la Vella",
+        "allowed": [
+            "Andorra la Vella"
+        ],
+        "time": 2.9418065547943115
+    },
+    "Angola": {
+        "display": "Luanda",
+        "allowed": [
+            "Luanda"
+        ],
+        "time": 2.2957873344421387
+    },
+    "Antigua and Barbuda": {
+        "display": "Saint John's",
+        "allowed": [
+            "Saint John's",
+            "Saint Johns",
+            "St. John's",
+            "St. Johns",
+            "St John's",
+            "St Johns"
+        ],
+        "time": 2.417089581489563
+    },
+    "Argentina": {
+        "display": "Buenos Aires",
+        "allowed": [
+            "Buenos Aires"
+        ],
+        "time": 2.7518415451049805
+    },
+    "Armenia": {
+        "display": "Yerevan",
+        "allowed": [
+            "Yerevan"
+        ],
+        "time": 2.650786876678467
+    },
+    "Australia": {
+        "display": "Canberra",
+        "allowed": [
+            "Canberra"
+        ],
+        "time": 1.8040236234664917
+    },
+    "Austria": {
+        "display": "Vienna",
+        "allowed": [
+            "Vienna"
+        ],
+        "time": 1.8207992315292358
+    },
+    "Azerbaijan": {
+        "display": "Baku",
+        "allowed": [
+            "Baku"
+        ],
+        "time": 4.070791840553284
+    },
+    "Bahamas": {
+        "display": "Nassau",
+        "allowed": [
+            "Nassau"
+        ],
+        "time": 1.981977105140686
+    },
+    "Bahrain": {
+        "display": "Manama",
+        "allowed": [
+            "Manama"
+        ],
+        "time": 4.310732364654541
+    },
+    "Bangladesh": {
+        "display": "Dhaka",
+        "allowed": [
+            "Dhaka"
+        ],
+        "time": 6.436706066131592
+    },
+    "Barbados": {
+        "display": "Bridgetown",
+        "allowed": [
+            "Bridgetown"
+        ],
+        "time": 3.3343552350997925
+    },
+    "Belarus": {
+        "display": "Minsk",
+        "allowed": [
+            "Minsk"
+        ],
+        "time": 1.9681857824325562
+    },
+    "Belgium": {
+        "display": "Brussels",
+        "allowed": [
+            "Brussels"
+        ],
+        "time": 3.1119192838668823
+    },
+    "Belize": {
+        "display": "Belmopan",
+        "allowed": [
+            "Belmopan"
+        ],
+        "time": 2.8500919342041016
+    },
+    "Benin": {
+        "display": "Porto-Novo",
+        "allowed": [
+            "Porto-Novo"
+        ],
+        "time": 4.548542737960815
+    },
+    "Bhutan": {
+        "display": "Thimphu",
+        "allowed": [
+            "Thimphu"
+        ],
+        "time": 3.7673912048339844
+    },
+    "Bolivia": {
+        "display": "La Paz",
+        "allowed": [
+            "La Paz",
+            "Sucre"
+        ],
+        "time": 2.82709801197052
+    },
+    "Bosnia and Herzegovina": {
+        "display": "Sarajevo",
+        "allowed": [
+            "Sarajevo"
+        ],
+        "time": 2.0537651777267456
+    },
+    "Botswana": {
+        "display": "Gaborone",
+        "allowed": [
+            "Gaborone"
+        ],
+        "time": 3.200924515724182
+    },
+    "Brazil": {
+        "display": "Brasilia",
+        "allowed": [
+            "Brasilia"
+        ],
+        "time": 2.0115084648132324
+    },
+    "Brunei": {
+        "display": "Bandar Seri Begawan",
+        "allowed": [
+            "Bandar Seri Begawan"
+        ],
+        "time": 3.1147358417510986
+    },
+    "Bulgaria": {
+        "display": "Sofia",
+        "allowed": [
+            "Sofia"
+        ],
+        "time": 2.1438419818878174
+    },
+    "Burkina Faso": {
+        "display": "Ouagadougou",
+        "allowed": [
+            "Ouagadougou"
+        ],
+        "time": 3.108031749725342
+    },
+    "Burundi": {
+        "display": "Gitega",
+        "allowed": [
+            "Gitega"
+        ],
+        "time": 4.977746248245239
+    },
+    "Cambodia": {
+        "display": "Phnom Penh",
+        "allowed": [
+            "Phnom Penh"
+        ],
+        "time": 3.1630024909973145
+    },
+    "Cameroon": {
+        "display": "Yaounde",
+        "allowed": [
+            "Yaounde"
+        ],
+        "time": 1.9097353219985962
+    },
+    "Canada": {
+        "display": "Ottawa",
+        "allowed": [
+            "Ottawa"
+        ],
+        "time": 2.067339301109314
+    },
+    "Cape Verde": {
+        "display": "Praia",
+        "allowed": [
+            "Praia"
+        ],
+        "time": 3.301681637763977
+    },
+    "Central African Republic": {
+        "display": "Bangui",
+        "allowed": [
+            "Bangui"
+        ],
+        "time": 2.4880549907684326
+    },
+    "Chad": {
+        "display": "N'Djamena",
+        "allowed": [
+            "N'Djamena",
+            "Ndjamena"
+        ],
+        "time": 5.147022604942322
+    },
+    "Chile": {
+        "display": "Santiago",
+        "allowed": [
+            "Santiago"
+        ],
+        "time": 1.8770627975463867
+    },
+    "China": {
+        "display": "Beijing",
+        "allowed": [
+            "Beijing"
+        ],
+        "time": 1.663664698600769
+    },
+    "Colombia": {
+        "display": "Bogota",
+        "allowed": [
+            "Bogota"
+        ],
+        "time": 1.8887680768966675
+    },
+    "Comoros": {
+        "display": "Moroni",
+        "allowed": [
+            "Moroni"
+        ],
+        "time": 1.7972661256790161
+    },
+    "Costa Rica": {
+        "display": "San Jose",
+        "allowed": [
+            "San Jose"
+        ],
+        "time": 3.412427306175232
+    },
+    "Croatia": {
+        "display": "Zagreb",
+        "allowed": [
+            "Zagreb"
+        ],
+        "time": 1.8835008144378662
+    },
+    "Cuba": {
+        "display": "Havana",
+        "allowed": [
+            "Havana"
+        ],
+        "time": 1.970621943473816
+    },
+    "Cyprus": {
+        "display": "Nicosia",
+        "allowed": [
+            "Nicosia"
+        ],
+        "time": 1.7667832374572754
+    },
+    "Czech Republic": {
+        "display": "Prague",
+        "allowed": [
+            "Prague"
+        ],
+        "time": 1.8291271924972534
+    },
+    "Democratic Republic of the Congo": {
+        "display": "Kinshasa",
+        "allowed": [
+            "Kinshasa"
+        ],
+        "time": 2.2595807313919067
+    },
+    "Denmark": {
+        "display": "Copenhagen",
+        "allowed": [
+            "Copenhagen"
+        ],
+        "time": 2.483293890953064
+    },
+    "Djibouti": {
+        "display": "Djibouti",
+        "allowed": [
+            "Djibouti",
+            "Djibouti City"
+        ],
+        "time": 2.187188148498535
+    },
+    "Dominica": {
+        "display": "Roseau",
+        "allowed": [
+            "Roseau"
+        ],
+        "time": 3.2244155406951904
+    },
+    "Dominican Republic": {
+        "display": "Santo Domingo",
+        "allowed": [
+            "Santo Domingo"
+        ],
+        "time": 4.598918318748474
+    },
+    "East Timor": {
+        "display": "Dili",
+        "allowed": [
+            "Dili"
+        ],
+        "time": 2.6979293823242188
+    },
+    "Ecuador": {
+        "display": "Quito",
+        "allowed": [
+            "Quito"
+        ],
+        "time": 1.5821367502212524
+    },
+    "Egypt": {
+        "display": "Cairo",
+        "allowed": [
+            "Cairo"
+        ],
+        "time": 1.8820412158966064
+    },
+    "El Salvador": {
+        "display": "San Salvador",
+        "allowed": [
+            "San Salvador"
+        ],
+        "time": 2.6710102558135986
+    },
+    "Equatorial Guinea": {
+        "display": "Malabo",
+        "allowed": [
+            "Malabo"
+        ],
+        "time": 3.334534168243408
+    },
+    "Eritrea": {
+        "display": "Asmara",
+        "allowed": [
+            "Asmara"
+        ],
+        "time": 4.08928370475769
+    },
+    "Estonia": {
+        "display": "Tallinn",
+        "allowed": [
+            "Tallinn"
+        ],
+        "time": 3.3000993728637695
+    },
+    "Eswatini": {
+        "display": "Mbabane",
+        "allowed": [
+            "Mbabane"
+        ],
+        "time": 2.14801025390625
+    },
+    "Ethiopia": {
+        "display": "Addis Ababa",
+        "allowed": [
+            "Addis Ababa"
+        ],
+        "time": 3.217325806617737
+    },
+    "Fiji": {
+        "display": "Suva",
+        "allowed": [
+            "Suva"
+        ],
+        "time": 2.2936551570892334
+    },
+    "Finland": {
+        "display": "Helsinki",
+        "allowed": [
+            "Helsinki"
+        ],
+        "time": 2.463289499282837
+    },
+    "France": {
+        "display": "Paris",
+        "allowed": [
+            "Paris"
+        ],
+        "time": 4.640745401382446
+    },
+    "Gabon": {
+        "display": "Libreville",
+        "allowed": [
+            "Libreville"
+        ],
+        "time": 2.563905954360962
+    },
+    "The Gambia": {
+        "display": "Banjul",
+        "allowed": [
+            "Banjul"
+        ],
+        "time": 2.4848629236221313
+    },
+    "Georgia": {
+        "display": "Tbilisi",
+        "allowed": [
+            "Tbilisi"
+        ],
+        "time": 2.8566062450408936
+    },
+    "Germany": {
+        "display": "Berlin",
+        "allowed": [
+            "Berlin"
+        ],
+        "time": 1.883354902267456
+    },
+    "Ghana": {
+        "display": "Accra",
+        "allowed": [
+            "Accra"
+        ],
+        "time": 2.0790311098098755
+    },
+    "Greece": {
+        "display": "Athens",
+        "allowed": [
+            "Athens"
+        ],
+        "time": 1.3959144353866577
+    },
+    "Grenada": {
+        "display": "Saint George's",
+        "allowed": [
+            "Saint George's",
+            "Saint Georges",
+            "St. George's",
+            "St. Georges",
+            "St George's",
+            "St Georges"
+        ],
+        "time": 9.533654928207397
+    },
+    "Guatemala": {
+        "display": "Guatemala City",
+        "allowed": [
+            "Guatemala City"
+        ],
+        "time": 2.6963860988616943
+    },
+    "Guinea": {
+        "display": "Conakry",
+        "allowed": [
+            "Conakry"
+        ],
+        "time": 4.449802756309509
+    },
+    "Guinea-Bissau": {
+        "display": "Bissau",
+        "allowed": [
+            "Bissau"
+        ],
+        "time": 1.420667052268982
+    },
+    "Guyana": {
+        "display": "Georgetown",
+        "allowed": [
+            "Georgetown"
+        ],
+        "time": 4.010634064674377
+    },
+    "Haiti": {
+        "display": "Port-au-Prince",
+        "allowed": [
+            "Port-au-Prince"
+        ],
+        "time": 5.461718559265137
+    },
+    "Honduras": {
+        "display": "Tegucigalpa",
+        "allowed": [
+            "Tegucigalpa"
+        ],
+        "time": 3.8018295764923096
+    },
+    "Hungary": {
+        "display": "Budapest",
+        "allowed": [
+            "Budapest"
+        ],
+        "time": 4.081013560295105
+    },
+    "Iceland": {
+        "display": "Reykjavik",
+        "allowed": [
+            "Reykjavik"
+        ],
+        "time": 4.77382230758667
+    },
+    "India": {
+        "display": "New Delhi",
+        "allowed": [
+            "New Delhi"
+        ],
+        "time": 2.4157644510269165
+    },
+    "Indonesia": {
+        "display": "Jakarta",
+        "allowed": [
+            "Jakarta"
+        ],
+        "time": 1.749459147453308
+    },
+    "Iran": {
+        "display": "Tehran",
+        "allowed": [
+            "Tehran"
+        ],
+        "time": 1.7553396224975586
+    },
+    "Iraq": {
+        "display": "Baghdad",
+        "allowed": [
+            "Baghdad"
+        ],
+        "time": 2.093796491622925
+    },
+    "Ireland": {
+        "display": "Dublin",
+        "allowed": [
+            "Dublin"
+        ],
+        "time": 1.4358478784561157
+    },
+    "Israel": {
+        "display": "Jerusalem",
+        "allowed": [
+            "Jerusalem"
+        ],
+        "time": 2.246737003326416
+    },
+    "Italy": {
+        "display": "Rome",
+        "allowed": [
+            "Rome"
+        ],
+        "time": 1.1328132152557373
+    },
+    "Ivory Coast": {
+        "display": "Yamoussoukro",
+        "allowed": [
+            "Yamoussoukro"
+        ],
+        "time": 2.6522828340530396
+    },
+    "Jamaica": {
+        "display": "Kingston",
+        "allowed": [
+            "Kingston"
+        ],
+        "time": 2.2955429553985596
+    },
+    "Japan": {
+        "display": "Tokyo",
+        "allowed": [
+            "Tokyo"
+        ],
+        "time": 2.309634208679199
+    },
+    "Jordan": {
+        "display": "Amman",
+        "allowed": [
+            "Amman"
+        ],
+        "time": 1.3621675968170166
+    },
+    "Kazakhstan": {
+        "display": "Astana",
+        "allowed": [
+            "Astana",
+            "Nur-Sultan"
+        ],
+        "time": 3.045647382736206
+    },
+    "Kenya": {
+        "display": "Nairobi",
+        "allowed": [
+            "Nairobi"
+        ],
+        "time": 2.1875271797180176
+    },
+    "Kiribati": {
+        "display": "Tarawa",
+        "allowed": [
+            "Tarawa"
+        ],
+        "time": 4.236432790756226
+    },
+    "Kosovo": {
+        "display": "Pristina",
+        "allowed": [
+            "Pristina"
+        ],
+        "time": 4.101577043533325
+    },
+    "Kuwait": {
+        "display": "Kuwait City",
+        "allowed": [
+            "Kuwait City"
+        ],
+        "time": 2.5052226781845093
+    },
+    "Kyrgyzstan": {
+        "display": "Bishkek",
+        "allowed": [
+            "Bishkek"
+        ],
+        "time": 3.4526920318603516
+    },
+    "Laos": {
+        "display": "Vientiane",
+        "allowed": [
+            "Vientiane"
+        ],
+        "time": 2.505383014678955
+    },
+    "Latvia": {
+        "display": "Riga",
+        "allowed": [
+            "Riga"
+        ],
+        "time": 3.1888476610183716
+    },
+    "Lebanon": {
+        "display": "Beirut",
+        "allowed": [
+            "Beirut"
+        ],
+        "time": 1.9708716869354248
+    },
+    "Lesotho": {
+        "display": "Maseru",
+        "allowed": [
+            "Maseru"
+        ],
+        "time": 1.9841452836990356
+    },
+    "Liberia": {
+        "display": "Monrovia",
+        "allowed": [
+            "Monrovia"
+        ],
+        "time": 2.2694005966186523
+    },
+    "Libya": {
+        "display": "Tripoli",
+        "allowed": [
+            "Tripoli"
+        ],
+        "time": 2.3140822649002075
+    },
+    "Liechtenstein": {
+        "display": "Vaduz",
+        "allowed": [
+            "Vaduz"
+        ],
+        "time": 1.7650634050369263
+    },
+    "Lithuania": {
+        "display": "Vilnius",
+        "allowed": [
+            "Vilnius"
+        ],
+        "time": 2.2859925031661987
+    },
+    "Luxembourg": {
+        "display": "Luxembourg",
+        "allowed": [
+            "Luxembourg"
+        ],
+        "time": 2.0359816551208496
+    },
+    "Macedonia": {
+        "display": "Skopje",
+        "allowed": [
+            "Skopje"
+        ],
+        "time": 3.4205888509750366
+    },
+    "Madagascar": {
+        "display": "Antananarivo",
+        "allowed": [
+            "Antananarivo"
+        ],
+        "time": 2.8138279914855957
+    },
+    "Malawi": {
+        "display": "Lilongwe",
+        "allowed": [
+            "Lilongwe"
+        ],
+        "time": 2.417690396308899
+    },
+    "Malaysia": {
+        "display": "Kuala Lumpur",
+        "allowed": [
+            "Kuala Lumpur"
+        ],
+        "time": 6.251131296157837
+    },
+    "Maldives": {
+        "display": "Male",
+        "allowed": [
+            "Male"
+        ],
+        "time": 1.5312721729278564
+    },
+    "Mali": {
+        "display": "Bamako",
+        "allowed": [
+            "Bamako"
+        ],
+        "time": 4.065612196922302
+    },
+    "Malta": {
+        "display": "Valletta",
+        "allowed": [
+            "Valletta"
+        ],
+        "time": 3.4738374948501587
+    },
+    "Marshall Islands": {
+        "display": "Majuro",
+        "allowed": [
+            "Majuro"
+        ],
+        "time": 4.90201461315155
+    },
+    "Mauritania": {
+        "display": "Nouakchott",
+        "allowed": [
+            "Nouakchott"
+        ],
+        "time": 6.95827054977417
+    },
+    "Mauritius": {
+        "display": "Port Louis",
+        "allowed": [
+            "Port Louis"
+        ],
+        "time": 3.868041157722473
+    },
+    "Mexico": {
+        "display": "Mexico City",
+        "allowed": [
+            "Mexico City"
+        ],
+        "time": 2.803457736968994
+    },
+    "Micronesia": {
+        "display": "Palikir",
+        "allowed": [
+            "Palikir"
+        ],
+        "time": 2.532423257827759
+    },
+    "Moldova": {
+        "display": "Chisinau",
+        "allowed": [
+            "Chisinau"
+        ],
+        "time": 2.08890962600708
+    },
+    "Monaco": {
+        "display": "Monaco",
+        "allowed": [
+            "Monaco"
+        ],
+        "time": 1.9837599992752075
+    },
+    "Mongolia": {
+        "display": "Ulaanbaatar",
+        "allowed": [
+            "Ulaanbaatar"
+        ],
+        "time": 2.8038136959075928
+    },
+    "Montenegro": {
+        "display": "Podgorica",
+        "allowed": [
+            "Podgorica"
+        ],
+        "time": 2.235402822494507
+    },
+    "Morocco": {
+        "display": "Rabat",
+        "allowed": [
+            "Rabat"
+        ],
+        "time": 2.391805410385132
+    },
+    "Mozambique": {
+        "display": "Maputo",
+        "allowed": [
+            "Maputo"
+        ],
+        "time": 1.8215781450271606
+    },
+    "Myanmar": {
+        "display": "Naypyidaw",
+        "allowed": [
+            "Naypyidaw"
+        ],
+        "time": 3.9595441818237305
+    },
+    "Namibia": {
+        "display": "Windhoek",
+        "allowed": [
+            "Windhoek"
+        ],
+        "time": 3.5140591859817505
+    },
+    "Nauru": {
+        "display": "Yaren",
+        "allowed": [
+            "Yaren"
+        ],
+        "time": 2.1852222681045532
+    },
+    "Nepal": {
+        "display": "Kathmandu",
+        "allowed": [
+            "Kathmandu"
+        ],
+        "time": 2.4945684671401978
+    },
+    "Netherlands": {
+        "display": "Amsterdam",
+        "allowed": [
+            "Amsterdam"
+        ],
+        "time": 4.900185465812683
+    },
+    "New Zealand": {
+        "display": "Wellington",
+        "allowed": [
+            "Wellington"
+        ],
+        "time": 2.9837281703948975
+    },
+    "Nicaragua": {
+        "display": "Managua",
+        "allowed": [
+            "Managua"
+        ],
+        "time": 2.131145477294922
+    },
+    "Niger": {
+        "display": "Niamey",
+        "allowed": [
+            "Niamey"
+        ],
+        "time": 2.267643690109253
+    },
+    "Nigeria": {
+        "display": "Abuja",
+        "allowed": [
+            "Abuja"
+        ],
+        "time": 2.824727177619934
+    },
+    "North Korea": {
+        "display": "Pyongyang",
+        "allowed": [
+            "Pyongyang"
+        ],
+        "time": 2.0925393104553223
+    },
+    "Norway": {
+        "display": "Oslo",
+        "allowed": [
+            "Oslo"
+        ],
+        "time": 1.5050173997879028
+    },
+    "Oman": {
+        "display": "Muscat",
+        "allowed": [
+            "Muscat"
+        ],
+        "time": 2.2155141830444336
+    },
+    "Pakistan": {
+        "display": "Islamabad",
+        "allowed": [
+            "Islamabad"
+        ],
+        "time": 2.333404064178467
+    },
+    "Palau": {
+        "display": "Ngerulmud",
+        "allowed": [
+            "Ngerulmud"
+        ],
+        "time": 3.4379982948303223
+    },
+    "Panama": {
+        "display": "Panama City",
+        "allowed": [
+            "Panama City"
+        ],
+        "time": 2.5848050117492676
+    },
+    "Papua New Guinea": {
+        "display": "Port Moresby",
+        "allowed": [
+            "Port Moresby"
+        ],
+        "time": 2.73481822013855
+    },
+    "Paraguay": {
+        "display": "Asuncion",
+        "allowed": [
+            "Asuncion"
+        ],
+        "time": 3.126515030860901
+    },
+    "Peru": {
+        "display": "Lima",
+        "allowed": [
+            "Lima"
+        ],
+        "time": 1.9409767389297485
+    },
+    "Philippines": {
+        "display": "Manila",
+        "allowed": [
+            "Manila"
+        ],
+        "time": 1.6329138278961182
+    },
+    "Poland": {
+        "display": "Warsaw",
+        "allowed": [
+            "Warsaw"
+        ],
+        "time": 2.409620523452759
+    },
+    "Portugal": {
+        "display": "Lisbon",
+        "allowed": [
+            "Lisbon"
+        ],
+        "time": 1.5722284317016602
+    },
+    "Qatar": {
+        "display": "Doha",
+        "allowed": [
+            "Doha"
+        ],
+        "time": 1.3717783689498901
+    },
+    "Republic of the Congo": {
+        "display": "Brazzaville",
+        "allowed": [
+            "Brazzaville"
+        ],
+        "time": 3.4361661672592163
+    },
+    "Romania": {
+        "display": "Bucharest",
+        "allowed": [
+            "Bucharest"
+        ],
+        "time": 4.4714919328689575
+    },
+    "Russia": {
+        "display": "Moscow",
+        "allowed": [
+            "Moscow"
+        ],
+        "time": 3.2755216360092163
+    },
+    "Rwanda": {
+        "display": "Kigali",
+        "allowed": [
+            "Kigali"
+        ],
+        "time": 1.9218002557754517
+    },
+    "Saint Kitts and Nevis": {
+        "display": "Basseterre",
+        "allowed": [
+            "Basseterre"
+        ],
+        "time": 6.1147449016571045
+    },
+    "Saint Lucia": {
+        "display": "Castries",
+        "allowed": [
+            "Castries"
+        ],
+        "time": 2.8658876419067383
+    },
+    "Saint Vincent and the Grenadines": {
+        "display": "Kingstown",
+        "allowed": [
+            "Kingstown"
+        ],
+        "time": 5.099834561347961
+    },
+    "Samoa": {
+        "display": "Apia",
+        "allowed": [
+            "Apia"
+        ],
+        "time": 1.281715750694275
+    },
+    "San Marino": {
+        "display": "San Marino",
+        "allowed": [
+            "San Marino"
+        ],
+        "time": 2.1673357486724854
+    },
+    "Sao Tome and Principe": {
+        "display": "Sao Tome",
+        "allowed": [
+            "Sao Tome"
+        ],
+        "time": 2.028733968734741
+    },
+    "Saudi Arabia": {
+        "display": "Riyadh",
+        "allowed": [
+            "Riyadh"
+        ],
+        "time": 2.123919129371643
+    },
+    "Senegal": {
+        "display": "Dakar",
+        "allowed": [
+            "Dakar"
+        ],
+        "time": 1.621903896331787
+    },
+    "Serbia": {
+        "display": "Belgrade",
+        "allowed": [
+            "Belgrade"
+        ],
+        "time": 2.535676956176758
+    },
+    "Seychelles": {
+        "display": "Victoria",
+        "allowed": [
+            "Victoria"
+        ],
+        "time": 2.2968305349349976
+    },
+    "Sierra Leone": {
+        "display": "Freetown",
+        "allowed": [
+            "Freetown"
+        ],
+        "time": 2.2749929428100586
+    },
+    "Singapore": {
+        "display": "Singapore",
+        "allowed": [
+            "Singapore"
+        ],
+        "time": 1.4851157665252686
+    },
+    "Slovakia": {
+        "display": "Bratislava",
+        "allowed": [
+            "Bratislava"
+        ],
+        "time": 3.0820019245147705
+    },
+    "Slovenia": {
+        "display": "Ljubljana",
+        "allowed": [
+            "Ljubljana"
+        ],
+        "time": 3.038108706474304
+    },
+    "Solomon Islands": {
+        "display": "Honiara",
+        "allowed": [
+            "Honiara"
+        ],
+        "time": 1.7579002380371094
+    },
+    "Somalia": {
+        "display": "Mogadishu",
+        "allowed": [
+            "Mogadishu"
+        ],
+        "time": 4.929179430007935
+    },
+    "South Africa": {
+        "display": "Pretoria/Cape Town/Bloemfontein",
+        "allowed": [
+            "Pretoria/Cape Town/Bloemfontein",
+            "Pretoria",
+            "Cape Town",
+            "Bloemfontein"
+        ],
+        "time": 2.275593876838684
+    },
+    "South Korea": {
+        "display": "Seoul",
+        "allowed": [
+            "Seoul"
+        ],
+        "time": 1.616166591644287
+    },
+    "South Sudan": {
+        "display": "Juba",
+        "allowed": [
+            "Juba"
+        ],
+        "time": 1.5773478746414185
+    },
+    "Spain": {
+        "display": "Madrid",
+        "allowed": [
+            "Madrid"
+        ],
+        "time": 3.8630818128585815
+    },
+    "Sri Lanka": {
+        "display": "Sri Jayawardenapura Kotte",
+        "allowed": [
+            "Sri Jayawardenapura Kotte"
+        ],
+        "time": 3.9913305044174194
+    },
+    "Sudan": {
+        "display": "Khartoum",
+        "allowed": [
+            "Khartoum"
+        ],
+        "time": 2.984442114830017
+    },
+    "Suriname": {
+        "display": "Paramaribo",
+        "allowed": [
+            "Paramaribo"
+        ],
+        "time": 4.93935227394104
+    },
+    "Sweden": {
+        "display": "Stockholm",
+        "allowed": [
+            "Stockholm"
+        ],
+        "time": 2.55969500541687
+    },
+    "Switzerland": {
+        "display": "Bern",
+        "allowed": [
+            "Bern"
+        ],
+        "time": 2.162979483604431
+    },
+    "Syria": {
+        "display": "Damascus",
+        "allowed": [
+            "Damascus"
+        ],
+        "time": 3.1221193075180054
+    },
+    "Taiwan": {
+        "display": "Taipei",
+        "allowed": [
+            "Taipei"
+        ],
+        "time": 2.2342841625213623
+    },
+    "Tajikistan": {
+        "display": "Dushanbe",
+        "allowed": [
+            "Dushanbe"
+        ],
+        "time": 2.3371411561965942
+    },
+    "Tanzania": {
+        "display": "Dodoma",
+        "allowed": [
+            "Dodoma"
+        ],
+        "time": 1.6498173475265503
+    },
+    "Thailand": {
+        "display": "Bangkok",
+        "allowed": [
+            "Bangkok"
+        ],
+        "time": 3.2755733728408813
+    },
+    "Togo": {
+        "display": "Lome",
+        "allowed": [
+            "Lome"
+        ],
+        "time": 2.2604165077209473
+    },
+    "Tonga": {
+        "display": "Nuku'alofa",
+        "allowed": [
+            "Nuku'alofa"
+        ],
+        "time": 3.767405867576599
+    },
+    "Trinidad and Tobago": {
+        "display": "Port-of-Spain",
+        "allowed": [
+            "Port-of-Spain",
+            "Port of Spain"
+        ],
+        "time": 2.5825400352478027
+    },
+    "Tunisia": {
+        "display": "Tunis",
+        "allowed": [
+            "Tunis"
+        ],
+        "time": 1.2563174962997437
+    },
+    "Turkey": {
+        "display": "Ankara",
+        "allowed": [
+            "Ankara"
+        ],
+        "time": 1.7012975215911865
+    },
+    "Turkmenistan": {
+        "display": "Ashgabat",
+        "allowed": [
+            "Ashgabat"
+        ],
+        "time": 2.757095217704773
+    },
+    "Tuvalu": {
+        "display": "Funafuti",
+        "allowed": [
+            "Funafuti"
+        ],
+        "time": 3.9956917762756348
+    },
+    "Uganda": {
+        "display": "Kampala",
+        "allowed": [
+            "Kampala"
+        ],
+        "time": 2.1353687047958374
+    },
+    "Ukraine": {
+        "display": "Kyiv",
+        "allowed": [
+            "Kyiv",
+            "Kyev"
+        ],
+        "time": 2.6500059366226196
+    },
+    "United Arab Emirates": {
+        "display": "Abu Dhabi",
+        "allowed": [
+            "Abu Dhabi"
+        ],
+        "time": 4.386448264122009
+    },
+    "United Kingdom": {
+        "display": "London",
+        "allowed": [
+            "London"
+        ],
+        "time": 1.6509426832199097
+    },
+    "United States of America": {
+        "display": "Washington, D.C.",
+        "allowed": [
+            "Washington, D.C.",
+            "DC",
+            "D.C.",
+            "Washington DC",
+            "Washington D.C.",
+            "Washington"
+        ],
+        "time": 1.502170205116272
+    },
+    "Uruguay": {
+        "display": "Montevideo",
+        "allowed": [
+            "Montevideo"
+        ],
+        "time": 2.8685842752456665
+    },
+    "Uzbekistan": {
+        "display": "Tashkent",
+        "allowed": [
+            "Tashkent"
+        ],
+        "time": 5.29390287399292
+    },
+    "Vanuatu": {
+        "display": "Port Vila",
+        "allowed": [
+            "Port Vila"
+        ],
+        "time": 3.9683135747909546
+    },
+    "Vatican City": {
+        "display": "Vatican City",
+        "allowed": [
+            "Vatican City",
+            "Vatican"
+        ],
+        "time": 1.4634116888046265
+    },
+    "Venezuela": {
+        "display": "Caracas",
+        "allowed": [
+            "Caracas"
+        ],
+        "time": 2.356205463409424
+    },
+    "Vietnam": {
+        "display": "Hanoi",
+        "allowed": [
+            "Hanoi"
+        ],
+        "time": 3.2454737424850464
+    },
+    "Yemen": {
+        "display": "Sana'a",
+        "allowed": [
+            "Sana'a",
+            "Sanaa"
+        ],
+        "time": 2.2049275636672974
+    },
+    "Zambia": {
+        "display": "Lusaka",
+        "allowed": [
+            "Lusaka"
+        ],
+        "time": 2.2186286449432373
+    },
+    "Zimbabwe": {
+        "display": "Harare",
+        "allowed": [
+            "Harare"
+        ],
+        "time": 4.161128759384155
+    }
+}

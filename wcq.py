@@ -1,43 +1,28 @@
 import sys
+import os
+import json
 import random
 from time import time
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 
+'''
+https://gis.stackexchange.com/questions/129959/problem-with-import-qgis-core-when-writing-a-stand-alone-pyqgis-script/130102#130102
+'''
 #from qgis.core import *
 
-'''
-Reads .txt file, returns a dictionary
-Each country maps to a list of acceptable capital names
-legend[country][0] is the displayed capital
-legend[country][1:] are the alternate spellings
-'''
-def get_legend():
-    legend = {}
-    fp = open('countriescapitals.txt', 'r')
-    for line in fp.readlines():
-        country, capitals = line.split(': ')
-        legend[country] = capitals.strip('\n').split('; ')
-    fp.close()
-    return legend
 
+def load_data():
+    with open('data.json', 'r') as fp:
+        data = json.load(fp)
+    return data
 
-def get_times():
-    times = {}
-    fp = open('countrytimes.txt', 'r')
-    for line in fp.readlines():
-        country, time_str = line.split(': ')
-        time = float(time_str.strip('\n'))
-        times[country] = time
-    fp.close()
-    return times
-    
-def save_times(times):
-    fp = open('countrytimes.txt', 'w')
-    for country, time in times.items():
-        fp.write(country + ': '+ str(time) +'\n')
-    fp.close()
+def save_data(data):
+    json_str = json.dumps(data, indent=4)
+    with open("data.json", "w") as fp:
+        fp.write(json_str)
+
     
 class WCQ(qtw.QWidget):
 
@@ -45,12 +30,10 @@ class WCQ(qtw.QWidget):
         super().__init__(*args, **kwargs)
         self.resize(450,900)
        
+        self.data = load_data()
+        self.countries = list(self.data.keys())
+        self.countries_remaining = list(self.data.keys())
         
-        self.legend = get_legend()
-        self.countries = list(self.legend.keys())
-        self.countries_remaining = list(self.legend.keys())
-        
-        self.times = get_times()
         self.start_time = 0
 
         self.remaining_label = qtw.QLabel()
@@ -97,13 +80,13 @@ class WCQ(qtw.QWidget):
         guess = self.line_input.text().lower()
         country = self.country_label.text()
 
-        if guess in [cap.lower() for cap in self.legend[country]]:
+        if guess in [cap.lower() for cap in self.data[country]["allowed"]]:
         
             elapsed_time = time() - self.start_time
-            self.times[country] = (self.times[country] + elapsed_time) / 2
+            self.data[country]["time"] = (self.data[country]["time"] + elapsed_time) / 2
             
             row_index = self.countries.index(country)
-            capital = self.legend[country][0]
+            capital = self.data[country]["display"]
             capital_cell = qtw.QTableWidgetItem(capital)
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsEditable)
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
@@ -134,7 +117,7 @@ class WCQ(qtw.QWidget):
         self.country_label.setText('YOU WIN!')
         self.line_input.disconnect()
         self.line_input.returnPressed.connect(self.line_input.clear)
-        save_times(self.times)
+        save_data(self.data)
         
 
         
