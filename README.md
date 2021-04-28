@@ -9,11 +9,11 @@ Instructions:
   3. Run `python wcg.py` to start the quiz.
   4. Guess the capital of each randomly selected country until the entire table is filled.
  
-`data.json` contains a dictionary used as an answer key and to store elapsed times:
-	key: country name
-	values:
-		- display: capital city name displayed on the table
-		- allowed: list of all permissible spellings of capital
-		- time: average time elapsed for user to guess capital; updates each round
+`data.json` contains a dictionary used as an answer key and to store elapsed times
+- key: country name
+- values:
+	- display: capital city name displayed on the table
+	- allowed: list of all permissible spellings of capital
+	- time: average time elapsed for user to guess capital; updates each round
 
 Answers are case insensitive.
