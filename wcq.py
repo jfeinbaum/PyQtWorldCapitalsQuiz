@@ -45,7 +45,7 @@ class WCQ(qtw.QWidget):
         self.get_new_country()
         self.line_input = qtw.QLineEdit()
         self.line_input.setFont(qtg.QFont('Arial',12))
-        self.line_input.returnPressed.connect(self.handle_input)
+        self.line_input.textChanged.connect(self.handle_input)
 
         
         self.table = qtw.QTableWidget(len(self.countries), 2)
@@ -97,12 +97,12 @@ class WCQ(qtw.QWidget):
 
             
             
-        self.line_input.clear()
-        self.display_remaining()
-        if len(self.countries_remaining) == 0:
-            self.win()
-        else:
-            self.get_new_country()
+            self.line_input.clear()
+            self.display_remaining()
+            if len(self.countries_remaining) == 0:
+                self.win()
+            else:
+                self.get_new_country()
         
     def display_remaining(self):
         self.remaining_label.setText('Remaining: ' + str(len(self.countries_remaining)))
