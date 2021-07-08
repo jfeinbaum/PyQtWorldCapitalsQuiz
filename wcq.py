@@ -43,6 +43,11 @@ class WCQ(qtw.QWidget):
         self.country_label = qtw.QLabel()
         self.country_label.setFont(qtg.QFont('Arial Black', 16))
         self.get_new_country()
+
+        self.skip_button = qtw.QPushButton('Skip')
+        self.skip_button.setFixedWidth(50)
+        self.skip_button.clicked.connect(self.get_new_country)
+
         self.line_input = qtw.QLineEdit()
         self.line_input.setFont(qtg.QFont('Arial',12))
         self.line_input.textChanged.connect(self.handle_input)
@@ -63,11 +68,13 @@ class WCQ(qtw.QWidget):
             
  
         
-        
+        country_skip_layout = qtw.QHBoxLayout()
+        country_skip_layout.addWidget(self.country_label)
+        country_skip_layout.addWidget(self.skip_button)
         
         layout = qtw.QVBoxLayout()
         layout.addWidget(self.remaining_label)
-        layout.addWidget(self.country_label)
+        layout.addLayout(country_skip_layout)
         layout.addWidget(self.line_input)
         layout.addWidget(self.table)
         self.setLayout(layout)
@@ -118,6 +125,7 @@ class WCQ(qtw.QWidget):
         self.line_input.disconnect()
         self.line_input.returnPressed.connect(self.line_input.clear)
         save_data(self.data)
+
         
 
         
