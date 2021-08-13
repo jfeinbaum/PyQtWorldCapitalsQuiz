@@ -1,7 +1,5 @@
 import sqlite3
 import json
-from wcq import load_data
-
 
 
 def main():
