@@ -1,38 +1,22 @@
 import sys
-import os
-import json
+import sqlite3
 import random
 from time import time
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 
-'''
-https://gis.stackexchange.com/questions/129959/problem-with-import-qgis-core-when-writing-a-stand-alone-pyqgis-script/130102#130102
-'''
-#from qgis.core import *
 
-
-def load_data():
-    with open('data.json', 'r') as fp:
-        data = json.load(fp)
-    return data
-
-def save_data(data):
-    json_str = json.dumps(data, indent=4)
-    with open("data.json", "w") as fp:
-        fp.write(json_str)
-
-    
 class WCQ(qtw.QWidget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.resize(450,900)
-       
-        self.data = load_data()
-        self.countries = list(self.data.keys())
-        self.countries_remaining = list(self.data.keys())
+
+        self.db = DB()
+        self.countries = self.db.countries()
+
+        self.countries_remaining = self.countries[:]
         
         self.start_time = 0
 
@@ -87,13 +71,17 @@ class WCQ(qtw.QWidget):
         guess = self.line_input.text().lower()
         country = self.country_label.text()
 
-        if guess in [cap.lower() for cap in self.data[country]["allowed"]]:
+        allowed_capitals = self.db.allowed_capitals_from_country(country)
+        if guess in [cap.lower() for cap in allowed_capitals]:
         
             elapsed_time = time() - self.start_time
-            self.data[country]["time"] = (self.data[country]["time"] + elapsed_time) / 2
+            old_time = self.db.get_country_time(country)
+            new_time = (old_time + elapsed_time) / 2
+            self.db.update_country_time(country, new_time)
+
             
             row_index = self.countries.index(country)
-            capital = self.data[country]["display"]
+            capital = self.db.capital_from_country(country)
             capital_cell = qtw.QTableWidgetItem(capital)
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsEditable)
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
@@ -124,11 +112,44 @@ class WCQ(qtw.QWidget):
         self.country_label.setText('YOU WIN!')
         self.line_input.disconnect()
         self.line_input.returnPressed.connect(self.line_input.clear)
-        save_data(self.data)
+        self.db.conn.close()
 
         
 
         
+class DB:
+    def __init__(self):
+        self.conn = sqlite3.connect('data.db')
+        self.cur = self.conn.cursor()
+
+    def capital_from_country(self, country):
+        sql = ''' SELECT display_capital FROM data WHERE country=? '''
+        self.cur.execute(sql, (country,))
+        return self.cur.fetchall()[0][0]
+
+    def countries(self):
+        sql = ''' SELECT country FROM data ORDER BY country '''
+        self.cur.execute(sql)
+        return [r[0] for r in self.cur.fetchall()]
+
+    def allowed_capitals_from_country(self, country):
+        display_capital = self.capital_from_country(country)
+        capitals = [display_capital]
+        sql = ''' SELECT c.capital FROM allowed_capitals c 
+        JOIN data d on d.id=c.country_id WHERE d.country=? '''
+        self.cur.execute(sql, (country,))
+        capitals.extend([r[0] for r in self.cur.fetchall()])
+        return capitals
+
+    def get_country_time(self, country):
+        sql = ''' SELECT time FROM data where country=? '''
+        self.cur.execute(sql, (country,))
+        return self.cur.fetchall()[0][0]
+
+    def update_country_time(self, country, time):
+        sql = ''' UPDATE data SET time=? WHERE country=? '''
+        self.cur.execute(sql, (time, country))
+
 
 
 if __name__ == '__main__':
