@@ -32,6 +32,10 @@ class WCQ(qtw.QWidget):
         self.skip_button.setFixedWidth(50)
         self.skip_button.clicked.connect(self.get_new_country)
 
+        self.give_up_button = qtw.QPushButton('Give Up')
+        self.give_up_button.setFixedWidth(80)
+        self.give_up_button.clicked.connect(self.give_up)
+
         self.line_input = qtw.QLineEdit()
         self.line_input.setFont(qtg.QFont('Arial',12))
         self.line_input.textChanged.connect(self.handle_input)
@@ -55,6 +59,7 @@ class WCQ(qtw.QWidget):
         country_skip_layout = qtw.QHBoxLayout()
         country_skip_layout.addWidget(self.country_label)
         country_skip_layout.addWidget(self.skip_button)
+        country_skip_layout.addWidget(self.give_up_button)
         
         layout = qtw.QVBoxLayout()
         layout.addWidget(self.remaining_label)
@@ -113,6 +118,19 @@ class WCQ(qtw.QWidget):
         self.line_input.disconnect()
         self.line_input.returnPressed.connect(self.line_input.clear)
         self.db.conn.close()
+
+    def give_up(self):
+        for row_index, country in enumerate(self.countries):
+            capital = self.db.capital_from_country(country)
+            capital_cell = qtw.QTableWidgetItem(capital)
+            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsEditable)
+            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
+            self.table.setItem(row_index, 1, capital_cell)
+
+        self.line_input.disconnect()
+        self.line_input.returnPressed.connect(self.line_input.clear)
+        self.db.conn.close()
+        self.give_up_button.setEnabled(False)
 
         
 
