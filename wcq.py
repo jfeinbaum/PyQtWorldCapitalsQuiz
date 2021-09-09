@@ -11,13 +11,14 @@ class WCQ(qtw.QWidget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.resize(450,900)
+        self.resize(450, 900)
 
         self.db = DB()
         self.countries = self.db.countries()
 
         self.countries_remaining = self.countries[:]
-        
+        self.current_elapsed_times = {}
+
         self.start_time = 0
 
         self.stats_layout = qtw.QHBoxLayout()
@@ -28,8 +29,12 @@ class WCQ(qtw.QWidget):
         self.stats_layout.addWidget(self.remaining_label)
 
         self.n_skips_label = qtw.QLabel()
-        self.n_skips_label.setFont(qtg.QFont('Arial', 12))
-        
+        self.n_skips_label.setFont(qtg.QFont('Arial', 10))
+        self.best_time_label = qtw.QLabel()
+        self.best_time_label.setFont(qtg.QFont('Arial', 10))
+        self.worst_time_label = qtw.QLabel()
+        self.worst_time_label.setFont(qtg.QFont('Arial', 10))
+
         self.country_label = qtw.QLabel()
         self.country_label.setFont(qtg.QFont('Arial Black', 16))
         self.get_new_country()
@@ -52,14 +57,13 @@ class WCQ(qtw.QWidget):
         # self.temp_win_button.clicked.connect(self.win)
 
         self.line_input = qtw.QLineEdit()
-        self.line_input.setFont(qtg.QFont('Arial',12))
+        self.line_input.setFont(qtg.QFont('Arial', 12))
         self.line_input.textChanged.connect(self.handle_input)
 
-        
         self.table = qtw.QTableWidget(len(self.countries), 2)
         self.table.setColumnWidth(0, 200)
-        self.table.setColumnWidth(1,150)
-        
+        self.table.setColumnWidth(1, 150)
+
         self.table.setHorizontalHeaderLabels(['Country', 'Capital'])
         self.table.setVerticalHeaderLabels(['' for x in self.countries])
         for i, country in enumerate(self.countries):
@@ -68,24 +72,20 @@ class WCQ(qtw.QWidget):
             country_cell.setFlags(country_cell.flags() & ~qtc.Qt.ItemIsSelectable)
             self.table.setItem(i, 0, country_cell)
 
-            
- 
-        
         self.interactive_layout = qtw.QHBoxLayout()
         self.interactive_layout.addWidget(self.country_label)
-        #self.interactive_layout.addWidget(self.temp_win_button)
+        # self.interactive_layout.addWidget(self.temp_win_button)
         self.interactive_layout.addWidget(self.skip_button)
         self.interactive_layout.addWidget(self.give_up_button)
-        
+
         layout = qtw.QVBoxLayout()
         layout.addLayout(self.stats_layout)
         layout.addLayout(self.interactive_layout)
         layout.addWidget(self.line_input)
         layout.addWidget(self.table)
         self.setLayout(layout)
-        
+
         self.show()
-    
 
     def handle_input(self):
 
@@ -94,13 +94,12 @@ class WCQ(qtw.QWidget):
 
         allowed_capitals = self.db.allowed_capitals_from_country(country)
         if guess in [cap.lower() for cap in allowed_capitals]:
-        
+
             elapsed_time = time() - self.start_time
             old_time = self.db.get_country_time(country)
             new_time = (old_time + elapsed_time) / 2
             self.db.update_country_time(country, new_time)
 
-            
             row_index = self.countries.index(country)
             capital = self.db.capital_from_country(country)
             capital_cell = qtw.QTableWidgetItem(capital)
@@ -108,24 +107,22 @@ class WCQ(qtw.QWidget):
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
             self.table.setItem(row_index, 1, capital_cell)
             self.countries_remaining.remove(country)
-            
-            
 
-            
-            
+            self.current_elapsed_times[capital] = elapsed_time
+
             self.line_input.clear()
             self.display_remaining()
             if len(self.countries_remaining) == 0:
                 self.win()
             else:
                 self.get_new_country()
-        
+
     def display_remaining(self):
         total = len(self.countries)
         remaining = len(self.countries_remaining)
         guessed = total - remaining
         self.remaining_label.setText(str(guessed) + '/' + str(total))
-    
+
     def skip(self):
         self.skips_used += 1
         self.get_new_country()
@@ -140,15 +137,24 @@ class WCQ(qtw.QWidget):
         self.db.disconnect()
         self.give_up_button.close()
         self.skip_button.close()
-        #self.temp_win_button.close()
+        # self.temp_win_button.close()
         self.interactive_layout.addWidget(self.play_again_button)
-        self.n_skips_label.setText('Skips used: ' + str(self.skips_used))
+        self.n_skips_label.setText('Skips: ' + str(self.skips_used))
+
+        sorted_elapsed_times = sorted(self.current_elapsed_times.items(),
+                                      key=lambda kv: (kv[1], kv[0]))
+        best_c, best_t = sorted_elapsed_times[0]
+        worst_c, worst_t = sorted_elapsed_times[-1]
+        self.best_time_label.setText('Best: ' + str(round(best_t, 3)) + ' (' + best_c + ')')
+        self.worst_time_label.setText('Worst: ' + str(round(worst_t, 3)) + ' (' + worst_c + ')')
         self.stats_layout.addWidget(self.n_skips_label)
+        self.stats_layout.addWidget(self.best_time_label)
+        self.stats_layout.addWidget(self.worst_time_label)
 
     def play_again(self):
         self.close()
         self.__init__()
-        
+
     def win(self):
         self.country_label.setText('You Win!')
         self.end_game()
@@ -164,9 +170,6 @@ class WCQ(qtw.QWidget):
         self.end_game()
 
 
-        
-
-        
 class DB:
     def __init__(self):
         self.conn = sqlite3.connect('data.db')
@@ -204,10 +207,8 @@ class DB:
         self.cur.execute(sql, (time, country))
 
 
-
 if __name__ == '__main__':
     app = qtw.QApplication(sys.argv)
     wcq = WCQ(windowTitle='World Capitals Quiz')
-    
-    
+
     sys.exit(app.exec_())
