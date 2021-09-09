@@ -20,9 +20,15 @@ class WCQ(qtw.QWidget):
         
         self.start_time = 0
 
+        self.stats_layout = qtw.QHBoxLayout()
+
         self.remaining_label = qtw.QLabel()
         self.remaining_label.setFont(qtg.QFont('Arial', 12))
         self.display_remaining()
+        self.stats_layout.addWidget(self.remaining_label)
+
+        self.n_skips_label = qtw.QLabel()
+        self.n_skips_label.setFont(qtg.QFont('Arial', 12))
         
         self.country_label = qtw.QLabel()
         self.country_label.setFont(qtg.QFont('Arial Black', 16))
@@ -30,11 +36,20 @@ class WCQ(qtw.QWidget):
 
         self.skip_button = qtw.QPushButton('Skip')
         self.skip_button.setFixedWidth(50)
-        self.skip_button.clicked.connect(self.get_new_country)
+        self.skip_button.clicked.connect(self.skip)
+        self.skips_used = 0
 
         self.give_up_button = qtw.QPushButton('Give Up')
         self.give_up_button.setFixedWidth(80)
         self.give_up_button.clicked.connect(self.give_up)
+
+        self.play_again_button = qtw.QPushButton('Play Again')
+        self.play_again_button.setFixedWidth(90)
+        self.play_again_button.clicked.connect(self.play_again)
+
+        # self.temp_win_button = qtw.QPushButton('Win (TEMP)')
+        # self.temp_win_button.setFixedWidth(100)
+        # self.temp_win_button.clicked.connect(self.win)
 
         self.line_input = qtw.QLineEdit()
         self.line_input.setFont(qtg.QFont('Arial',12))
@@ -56,14 +71,15 @@ class WCQ(qtw.QWidget):
             
  
         
-        country_skip_layout = qtw.QHBoxLayout()
-        country_skip_layout.addWidget(self.country_label)
-        country_skip_layout.addWidget(self.skip_button)
-        country_skip_layout.addWidget(self.give_up_button)
+        self.interactive_layout = qtw.QHBoxLayout()
+        self.interactive_layout.addWidget(self.country_label)
+        #self.interactive_layout.addWidget(self.temp_win_button)
+        self.interactive_layout.addWidget(self.skip_button)
+        self.interactive_layout.addWidget(self.give_up_button)
         
         layout = qtw.QVBoxLayout()
-        layout.addWidget(self.remaining_label)
-        layout.addLayout(country_skip_layout)
+        layout.addLayout(self.stats_layout)
+        layout.addLayout(self.interactive_layout)
         layout.addWidget(self.line_input)
         layout.addWidget(self.table)
         self.setLayout(layout)
@@ -105,32 +121,48 @@ class WCQ(qtw.QWidget):
                 self.get_new_country()
         
     def display_remaining(self):
-        self.remaining_label.setText('Remaining: ' + str(len(self.countries_remaining)))
+        total = len(self.countries)
+        remaining = len(self.countries_remaining)
+        guessed = total - remaining
+        self.remaining_label.setText(str(guessed) + '/' + str(total))
     
+    def skip(self):
+        self.skips_used += 1
+        self.get_new_country()
 
     def get_new_country(self):
         country = random.choice(self.countries_remaining)
         self.country_label.setText(country)
         self.start_time = time()
+
+    def end_game(self):
+        self.line_input.disconnect()
+        self.db.disconnect()
+        self.give_up_button.close()
+        self.skip_button.close()
+        #self.temp_win_button.close()
+        self.interactive_layout.addWidget(self.play_again_button)
+        self.n_skips_label.setText('Skips used: ' + str(self.skips_used))
+        self.stats_layout.addWidget(self.n_skips_label)
+
+    def play_again(self):
+        self.close()
+        self.__init__()
         
     def win(self):
-        self.country_label.setText('YOU WIN!')
-        self.line_input.disconnect()
-        self.line_input.returnPressed.connect(self.line_input.clear)
-        self.db.conn.close()
+        self.country_label.setText('You Win!')
+        self.end_game()
 
     def give_up(self):
+        self.country_label.setText('Game Over')
         for row_index, country in enumerate(self.countries):
             capital = self.db.capital_from_country(country)
             capital_cell = qtw.QTableWidgetItem(capital)
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsEditable)
             capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
             self.table.setItem(row_index, 1, capital_cell)
+        self.end_game()
 
-        self.line_input.disconnect()
-        self.line_input.returnPressed.connect(self.line_input.clear)
-        self.db.conn.close()
-        self.give_up_button.setEnabled(False)
 
         
 
@@ -139,6 +171,9 @@ class DB:
     def __init__(self):
         self.conn = sqlite3.connect('data.db')
         self.cur = self.conn.cursor()
+
+    def disconnect(self):
+        self.conn.close()
 
     def capital_from_country(self, country):
         sql = ''' SELECT display_capital FROM data WHERE country=? '''
