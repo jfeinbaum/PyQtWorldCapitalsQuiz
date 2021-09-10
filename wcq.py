@@ -22,7 +22,10 @@ class WCQ(qtw.QWidget):
         self.countries_remaining = self.countries[:]
         self.current_elapsed_times = {}
 
-        self.start_time = 0
+        self.elapsed_time = 0
+        self.paused_elapsed_time = 0
+        self.pause_ts = None
+        self.resume_ts = None
 
         self.stats_layout = qtw.QHBoxLayout()
 
@@ -67,7 +70,6 @@ class WCQ(qtw.QWidget):
         self.game_paused = False
         self.toggle_pause_button.clicked.connect(self.toggle_pause)
 
-
         self.line_input = qtw.QLineEdit()
         self.line_input.setFont(qtg.QFont('Arial', 12))
         self.line_input.textChanged.connect(self.handle_input)
@@ -108,9 +110,10 @@ class WCQ(qtw.QWidget):
         allowed_capitals = self.db.allowed_capitals_from_country(country)
         if guess in [cap.lower() for cap in allowed_capitals]:
 
-            elapsed_time = time() - self.start_time
+            elapsed_time = time() - self.resume_ts
+            self.elapsed_time += elapsed_time
             old_time = self.db.get_country_time(country)
-            new_time = (old_time + elapsed_time) / 2
+            new_time = (old_time + self.elapsed_time) / 2
             self.db.update_country_time(country, new_time)
 
             row_index = self.countries.index(country)
@@ -121,7 +124,7 @@ class WCQ(qtw.QWidget):
             self.table.setItem(row_index, 1, capital_cell)
             self.countries_remaining.remove(country)
 
-            self.current_elapsed_times[capital] = elapsed_time
+            self.current_elapsed_times[capital] = self.elapsed_time
 
             self.line_input.clear()
             self.display_remaining()
@@ -143,20 +146,32 @@ class WCQ(qtw.QWidget):
     def get_new_country(self):
         country = random.choice(self.countries_remaining)
         self.country_label.setText(country)
-        self.start_time = time()
+        self.elapsed_time = 0
+        self.paused_elapsed_time = 0
+        self.resume_ts = time()
 
     def toggle_pause(self):
         if not self.game_paused:
+            self.pause_ts = time()
+            time_while_resumed = self.pause_ts - self.resume_ts
+            self.elapsed_time += time_while_resumed
+
             resume_pm = qtw.QStyle.SP_MediaPlay
             resume_icon = self.style().standardIcon(resume_pm)
             self.toggle_pause_button.setIcon(resume_icon)
+            self.line_input.setEnabled(False)
+            self.skip_button.setEnabled(False)
             self.game_paused = True
         else:
+            self.resume_ts = time()
+
             pause_pm = qtw.QStyle.SP_MediaPause
             pause_icon = self.style().standardIcon(pause_pm)
             self.toggle_pause_button.setIcon(pause_icon)
+            self.line_input.setEnabled(True)
+            self.line_input.setFocus(qtc.Qt.MouseFocusReason)
+            self.skip_button.setEnabled(True)
             self.game_paused = False
-
 
     def end_game(self):
         self.line_input.disconnect()
@@ -232,14 +247,14 @@ class DB:
         self.cur.execute(sql, (country,))
         return self.cur.fetchall()[0][0]
 
-    def update_country_time(self, country, time):
+    def update_country_time(self, country, new_time):
         sql = ''' UPDATE data SET time=? WHERE country=? '''
-        self.cur.execute(sql, (time, country))
+        self.cur.execute(sql, (new_time, country))
 
 
 if __name__ == '__main__':
     if not os.path.exists(DB_NAME):
-        subprocess.call(['python3','init_db.py'])
+        subprocess.call(['python3', 'init_db.py'])
     app = qtw.QApplication(sys.argv)
     wcq = WCQ(windowTitle='World Capitals Quiz')
 
