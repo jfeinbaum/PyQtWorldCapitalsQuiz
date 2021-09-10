@@ -59,6 +59,15 @@ class WCQ(qtw.QWidget):
         # self.temp_win_button.setFixedWidth(100)
         # self.temp_win_button.clicked.connect(self.win)
 
+        self.toggle_pause_button = qtw.QPushButton()
+        self.toggle_pause_button.setFixedWidth(40)
+        pause_pm = qtw.QStyle.SP_MediaPause
+        pause_icon = self.style().standardIcon(pause_pm)
+        self.toggle_pause_button.setIcon(pause_icon)
+        self.game_paused = False
+        self.toggle_pause_button.clicked.connect(self.toggle_pause)
+
+
         self.line_input = qtw.QLineEdit()
         self.line_input.setFont(qtg.QFont('Arial', 12))
         self.line_input.textChanged.connect(self.handle_input)
@@ -77,6 +86,7 @@ class WCQ(qtw.QWidget):
 
         self.interactive_layout = qtw.QHBoxLayout()
         self.interactive_layout.addWidget(self.country_label)
+        self.interactive_layout.addWidget(self.toggle_pause_button)
         # self.interactive_layout.addWidget(self.temp_win_button)
         self.interactive_layout.addWidget(self.skip_button)
         self.interactive_layout.addWidget(self.give_up_button)
@@ -135,14 +145,29 @@ class WCQ(qtw.QWidget):
         self.country_label.setText(country)
         self.start_time = time()
 
+    def toggle_pause(self):
+        if not self.game_paused:
+            resume_pm = qtw.QStyle.SP_MediaPlay
+            resume_icon = self.style().standardIcon(resume_pm)
+            self.toggle_pause_button.setIcon(resume_icon)
+            self.game_paused = True
+        else:
+            pause_pm = qtw.QStyle.SP_MediaPause
+            pause_icon = self.style().standardIcon(pause_pm)
+            self.toggle_pause_button.setIcon(pause_icon)
+            self.game_paused = False
+
+
     def end_game(self):
         self.line_input.disconnect()
         self.db.disconnect()
         self.give_up_button.close()
         self.skip_button.close()
+        self.toggle_pause_button.close()
         # self.temp_win_button.close()
         self.interactive_layout.addWidget(self.play_again_button)
-        self.n_skips_label.setText('Skips: ' + str(self.skips_used))
+        if self.skips_used > 0:
+            self.n_skips_label.setText('Skips: ' + str(self.skips_used))
 
         if self.current_elapsed_times:
             sorted_elapsed_times = sorted(self.current_elapsed_times.items(),
@@ -151,6 +176,7 @@ class WCQ(qtw.QWidget):
             worst_c, worst_t = sorted_elapsed_times[-1]
             self.best_time_label.setText('Best: ' + str(round(best_t, 3)) + ' (' + best_c + ')')
             self.worst_time_label.setText('Worst: ' + str(round(worst_t, 3)) + ' (' + worst_c + ')')
+
         self.stats_layout.addWidget(self.n_skips_label)
         self.stats_layout.addWidget(self.best_time_label)
         self.stats_layout.addWidget(self.worst_time_label)
