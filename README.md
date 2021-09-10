@@ -1,7 +1,7 @@
 # World Capitals Quiz
 ## created by Jake Feinbaum
   
-A quiz to name all the world capitals, built with PyQt5 and Sqlite3.
+A quiz to name all the world capitals, built with PyQt5 and SQLite3.
 
 Instructions:
   1. Download and `cd` into this repository.
