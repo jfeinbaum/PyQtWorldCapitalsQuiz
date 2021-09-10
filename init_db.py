@@ -2,9 +2,11 @@ import sqlite3
 import os
 
 
+DB_NAME = 'data.db'
+
 def main():
 
-    db_name = 'data.db'
+
     data = {}
 
     fp = open('countriescapitals.txt', 'r')
@@ -18,14 +20,14 @@ def main():
 
     fp.close()
 
-    if os.path.exists(db_name):
+    if os.path.exists(DB_NAME):
         remake = input('Are you sure you want to remake the database? Metadata will be lost!\nY or N: ').lower()
         if remake == 'n':
-            print('Okay, keeping original', db_name)
+            print('Okay, keeping original', DB_NAME)
             return
 
 
-    conn = sqlite3.connect(db_name)
+    conn = sqlite3.connect(DB_NAME)
     cur = conn.cursor()
 
     cur.execute(''' DROP TABLE IF EXISTS data; ''')
@@ -50,7 +52,7 @@ def main():
     conn.commit()
     conn.close()
 
-    print('Created', db_name)
+    print('Created', DB_NAME)
 
 if __name__ == '__main__':
     main()

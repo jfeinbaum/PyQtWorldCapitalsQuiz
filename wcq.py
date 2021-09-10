@@ -1,10 +1,13 @@
 import sys
 import sqlite3
+import subprocess
 import random
+import os
 from time import time
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
+from init_db import DB_NAME
 
 
 class WCQ(qtw.QWidget):
@@ -141,12 +144,13 @@ class WCQ(qtw.QWidget):
         self.interactive_layout.addWidget(self.play_again_button)
         self.n_skips_label.setText('Skips: ' + str(self.skips_used))
 
-        sorted_elapsed_times = sorted(self.current_elapsed_times.items(),
-                                      key=lambda kv: (kv[1], kv[0]))
-        best_c, best_t = sorted_elapsed_times[0]
-        worst_c, worst_t = sorted_elapsed_times[-1]
-        self.best_time_label.setText('Best: ' + str(round(best_t, 3)) + ' (' + best_c + ')')
-        self.worst_time_label.setText('Worst: ' + str(round(worst_t, 3)) + ' (' + worst_c + ')')
+        if self.current_elapsed_times:
+            sorted_elapsed_times = sorted(self.current_elapsed_times.items(),
+                                          key=lambda kv: (kv[1], kv[0]))
+            best_c, best_t = sorted_elapsed_times[0]
+            worst_c, worst_t = sorted_elapsed_times[-1]
+            self.best_time_label.setText('Best: ' + str(round(best_t, 3)) + ' (' + best_c + ')')
+            self.worst_time_label.setText('Worst: ' + str(round(worst_t, 3)) + ' (' + worst_c + ')')
         self.stats_layout.addWidget(self.n_skips_label)
         self.stats_layout.addWidget(self.best_time_label)
         self.stats_layout.addWidget(self.worst_time_label)
@@ -172,7 +176,7 @@ class WCQ(qtw.QWidget):
 
 class DB:
     def __init__(self):
-        self.conn = sqlite3.connect('data.db')
+        self.conn = sqlite3.connect(DB_NAME)
         self.cur = self.conn.cursor()
 
     def disconnect(self):
@@ -208,6 +212,8 @@ class DB:
 
 
 if __name__ == '__main__':
+    if not os.path.exists(DB_NAME):
+        subprocess.call(['python3','init_db.py'])
     app = qtw.QApplication(sys.argv)
     wcq = WCQ(windowTitle='World Capitals Quiz')
 
