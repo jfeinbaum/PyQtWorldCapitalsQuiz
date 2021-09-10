@@ -13,7 +13,7 @@ def main():
     for line in fp.readlines():
             country, capitals = line.split(': ')
             data[country] = {}
-            capitals = capitals.split(';')
+            capitals = [s.strip('\n') for s in capitals.split(';')]
             data[country]['display'] = capitals[0]
             data[country]['allowed'] = capitals
 
