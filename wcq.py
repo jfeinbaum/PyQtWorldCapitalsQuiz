@@ -14,7 +14,7 @@ class WCQ(qtw.QWidget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.resize(450, 900)
+        self.resize(550, 900)
 
         self.db = DB()
         self.countries = self.db.countries()
@@ -74,11 +74,14 @@ class WCQ(qtw.QWidget):
         self.line_input.setFont(qtg.QFont('Arial', 12))
         self.line_input.textChanged.connect(self.handle_input)
 
-        self.table = qtw.QTableWidget(len(self.countries), 2)
+        self.table = qtw.QTableWidget(len(self.countries), 4)
         self.table.setColumnWidth(0, 200)
         self.table.setColumnWidth(1, 150)
+        self.table.setColumnWidth(2, 75)
+        self.table.setColumnWidth(3, 75)
 
-        self.table.setHorizontalHeaderLabels(['Country', 'Capital'])
+
+        self.table.setHorizontalHeaderLabels(['Country', 'Capital', 'Time', 'Avg. Time'])
         self.table.setVerticalHeaderLabels(['' for x in self.countries])
         for i, country in enumerate(self.countries):
             country_cell = qtw.QTableWidgetItem(country)
@@ -125,6 +128,11 @@ class WCQ(qtw.QWidget):
             self.countries_remaining.remove(country)
 
             self.current_elapsed_times[capital] = self.elapsed_time
+            time_cell = qtw.QTableWidgetItem(str(round(self.elapsed_time, 3)))
+            time_cell.setFlags(time_cell.flags() & ~qtc.Qt.ItemIsEditable)
+            time_cell.setFlags(time_cell.flags() & ~qtc.Qt.ItemIsSelectable)
+            self.table.setItem(row_index, 2, time_cell)
+
 
             self.line_input.clear()
             self.display_remaining()
@@ -174,6 +182,14 @@ class WCQ(qtw.QWidget):
             self.game_paused = False
 
     def end_game(self):
+
+        for row_index, country in enumerate(self.countries):
+            avg_time = self.db.get_country_time(country)
+            avg_time_cell = qtw.QTableWidgetItem(str(round(avg_time, 3)))
+            avg_time_cell.setFlags(avg_time_cell.flags() & ~qtc.Qt.ItemIsEditable)
+            avg_time_cell.setFlags(avg_time_cell.flags() & ~qtc.Qt.ItemIsSelectable)
+            self.table.setItem(row_index, 3, avg_time_cell)
+
         self.line_input.disconnect()
         self.db.disconnect()
         self.give_up_button.close()
@@ -195,6 +211,7 @@ class WCQ(qtw.QWidget):
         self.stats_layout.addWidget(self.n_skips_label)
         self.stats_layout.addWidget(self.best_time_label)
         self.stats_layout.addWidget(self.worst_time_label)
+
 
     def play_again(self):
         self.close()
