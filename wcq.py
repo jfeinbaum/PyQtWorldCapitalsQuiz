@@ -84,10 +84,7 @@ class WCQ(qtw.QWidget):
         self.table.setHorizontalHeaderLabels(['Country', 'Capital', 'Time', 'Avg. Time'])
         self.table.setVerticalHeaderLabels(['' for x in self.countries])
         for i, country in enumerate(self.countries):
-            country_cell = qtw.QTableWidgetItem(country)
-            country_cell.setFlags(country_cell.flags() & ~qtc.Qt.ItemIsEditable)
-            country_cell.setFlags(country_cell.flags() & ~qtc.Qt.ItemIsSelectable)
-            self.table.setItem(i, 0, country_cell)
+            self.fill_cell(i, 0, country)
 
         self.interactive_layout = qtw.QHBoxLayout()
         self.interactive_layout.addWidget(self.country_label)
@@ -105,6 +102,13 @@ class WCQ(qtw.QWidget):
 
         self.show()
 
+    def fill_cell(self, row_index, col_index, value):
+        cell = qtw.QTableWidgetItem(value)
+        cell.setFlags(cell.flags() & ~qtc.Qt.ItemIsEditable)
+        cell.setFlags(cell.flags() & ~qtc.Qt.ItemIsSelectable)
+        self.table.setItem(row_index, col_index, cell)
+
+
     def handle_input(self):
 
         guess = self.line_input.text().lower()
@@ -121,17 +125,11 @@ class WCQ(qtw.QWidget):
 
             row_index = self.countries.index(country)
             capital = self.db.capital_from_country(country)
-            capital_cell = qtw.QTableWidgetItem(capital)
-            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsEditable)
-            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
-            self.table.setItem(row_index, 1, capital_cell)
+            self.fill_cell(row_index, 1, capital)
             self.countries_remaining.remove(country)
 
             self.current_elapsed_times[capital] = self.elapsed_time
-            time_cell = qtw.QTableWidgetItem(str(round(self.elapsed_time, 3)))
-            time_cell.setFlags(time_cell.flags() & ~qtc.Qt.ItemIsEditable)
-            time_cell.setFlags(time_cell.flags() & ~qtc.Qt.ItemIsSelectable)
-            self.table.setItem(row_index, 2, time_cell)
+            self.fill_cell(row_index, 2, str(round(self.elapsed_time, 3)))
 
 
             self.line_input.clear()
@@ -185,10 +183,7 @@ class WCQ(qtw.QWidget):
 
         for row_index, country in enumerate(self.countries):
             avg_time = self.db.get_country_time(country)
-            avg_time_cell = qtw.QTableWidgetItem(str(round(avg_time, 3)))
-            avg_time_cell.setFlags(avg_time_cell.flags() & ~qtc.Qt.ItemIsEditable)
-            avg_time_cell.setFlags(avg_time_cell.flags() & ~qtc.Qt.ItemIsSelectable)
-            self.table.setItem(row_index, 3, avg_time_cell)
+            self.fill_cell(row_index, 3, str(round(avg_time, 3)))
 
         self.line_input.disconnect()
         self.db.disconnect()
