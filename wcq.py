@@ -58,10 +58,6 @@ class WCQ(qtw.QWidget):
         self.play_again_button.setFixedWidth(90)
         self.play_again_button.clicked.connect(self.play_again)
 
-        # self.temp_win_button = qtw.QPushButton('Win (TEMP)')
-        # self.temp_win_button.setFixedWidth(100)
-        # self.temp_win_button.clicked.connect(self.win)
-
         self.toggle_pause_button = qtw.QPushButton()
         self.toggle_pause_button.setFixedWidth(40)
         pause_pm = qtw.QStyle.SP_MediaPause
@@ -80,16 +76,14 @@ class WCQ(qtw.QWidget):
         self.table.setColumnWidth(2, 75)
         self.table.setColumnWidth(3, 75)
 
-
         self.table.setHorizontalHeaderLabels(['Country', 'Capital', 'Time', 'Avg. Time'])
-        self.table.setVerticalHeaderLabels(['' for x in self.countries])
+        self.table.setVerticalHeaderLabels(['' for _ in self.countries])
         for i, country in enumerate(self.countries):
             self.fill_cell(i, 0, country)
 
         self.interactive_layout = qtw.QHBoxLayout()
         self.interactive_layout.addWidget(self.country_label)
         self.interactive_layout.addWidget(self.toggle_pause_button)
-        # self.interactive_layout.addWidget(self.temp_win_button)
         self.interactive_layout.addWidget(self.skip_button)
         self.interactive_layout.addWidget(self.give_up_button)
 
@@ -107,7 +101,6 @@ class WCQ(qtw.QWidget):
         cell.setFlags(cell.flags() & ~qtc.Qt.ItemIsEditable)
         cell.setFlags(cell.flags() & ~qtc.Qt.ItemIsSelectable)
         self.table.setItem(row_index, col_index, cell)
-
 
     def handle_input(self):
 
@@ -131,7 +124,6 @@ class WCQ(qtw.QWidget):
             self.current_elapsed_times[capital] = self.elapsed_time
             self.fill_cell(row_index, 2, str(round(self.elapsed_time, 3)))
 
-
             self.line_input.clear()
             self.display_remaining()
             if len(self.countries_remaining) == 0:
@@ -147,6 +139,7 @@ class WCQ(qtw.QWidget):
 
     def skip(self):
         self.skips_used += 1
+        self.line_input.clear()
         self.get_new_country()
 
     def get_new_country(self):
@@ -190,7 +183,6 @@ class WCQ(qtw.QWidget):
         self.give_up_button.close()
         self.skip_button.close()
         self.toggle_pause_button.close()
-        # self.temp_win_button.close()
         self.interactive_layout.addWidget(self.play_again_button)
         if self.skips_used > 0:
             self.n_skips_label.setText('Skips: ' + str(self.skips_used))
@@ -206,7 +198,6 @@ class WCQ(qtw.QWidget):
         self.stats_layout.addWidget(self.n_skips_label)
         self.stats_layout.addWidget(self.best_time_label)
         self.stats_layout.addWidget(self.worst_time_label)
-
 
     def play_again(self):
         self.close()
