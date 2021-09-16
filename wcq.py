@@ -18,6 +18,7 @@ class WCQ(qtw.QWidget):
 
         self.db = DB()
         self.countries = self.db.countries()
+        self.avg_times = self.db.all_countries_and_times()
 
         self.countries_remaining = self.countries[:]
         self.current_elapsed_times = {}
@@ -122,7 +123,11 @@ class WCQ(qtw.QWidget):
             self.countries_remaining.remove(country)
 
             self.current_elapsed_times[capital] = self.elapsed_time
+            avg_time = self.avg_times[country]
             self.fill_cell(row_index, 2, str(round(self.elapsed_time, 3)))
+            self.fill_cell(row_index, 3, str(round(avg_time, 3)))
+
+
 
             self.line_input.clear()
             self.display_remaining()
@@ -245,6 +250,11 @@ class DB:
         capitals.extend([r[0] for r in self.cur.fetchall()])
         return capitals
 
+    def all_countries_and_times(self):
+        sql = ''' SELECT country, time FROM data '''
+        self.cur.execute(sql)
+        return {country: time for (country, time) in self.cur.fetchall()}
+
     def get_country_time(self, country):
         sql = ''' SELECT time FROM data where country=? '''
         self.cur.execute(sql, (country,))
@@ -253,6 +263,7 @@ class DB:
     def update_country_time(self, country, new_time):
         sql = ''' UPDATE data SET time=? WHERE country=? '''
         self.cur.execute(sql, (new_time, country))
+
 
 
 if __name__ == '__main__':
