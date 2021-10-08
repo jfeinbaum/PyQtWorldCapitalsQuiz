@@ -81,6 +81,9 @@ class WCQ(qtw.QWidget):
         self.table.setVerticalHeaderLabels(['' for _ in self.countries])
         for i, country in enumerate(self.countries):
             self.fill_cell(i, 0, country)
+            self.fill_cell(i, 1, '')
+            self.fill_cell(i, 2, '')
+            self.fill_cell(i, 3, '')
 
         self.interactive_layout = qtw.QHBoxLayout()
         self.interactive_layout.addWidget(self.country_label)
@@ -101,6 +104,7 @@ class WCQ(qtw.QWidget):
         cell = qtw.QTableWidgetItem(value)
         cell.setFlags(cell.flags() & ~qtc.Qt.ItemIsEditable)
         cell.setFlags(cell.flags() & ~qtc.Qt.ItemIsSelectable)
+        cell.setFlags(cell.flags() & ~qtc.Qt.ItemIsUserCheckable)
         self.table.setItem(row_index, col_index, cell)
 
     def handle_input(self):
