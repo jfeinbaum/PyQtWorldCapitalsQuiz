@@ -55,7 +55,7 @@ def main():
     conn.commit()
     conn.close()
 
-    print('Created', DB_NAME)
+    print('Created new', DB_NAME)
 
 if __name__ == '__main__':
     main()
