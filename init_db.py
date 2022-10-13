@@ -21,10 +21,13 @@ def main():
     fp.close()
 
     if os.path.exists(DB_NAME):
-        remake = input('Are you sure you want to remake the database? Metadata will be lost!\nY or N: ').lower()
-        if remake == 'n':
-            print('Okay, keeping original', DB_NAME)
-            return
+        while True:
+            remake = input('Are you sure you want to remake the database? Metadata will be lost!\nY or N: ').lower()
+            if remake == 'n':
+                print('Okay, keeping original', DB_NAME)
+                return
+            elif remake == 'y':
+                break
 
 
     conn = sqlite3.connect(DB_NAME)
