@@ -22,14 +22,19 @@ class WorldMapWidget(qtw.QWidget):
     def __init__(self, geojson_path, parent=None):
         super().__init__(parent)
 
-        self.highlighted = {}  # country name -> QColor
+        self.highlighted = []
 
         with open(geojson_path, encoding="utf-8") as f:
             self.geojson = json.load(f)
 
         self.setMinimumSize(800, 400)
 
+
+
     
+    def highlight_country(self, country_name):
+        self.highlighted.append(country_name)
+        self.update()
 
 
     def project(self, lon, lat):
@@ -40,14 +45,24 @@ class WorldMapWidget(qtw.QWidget):
         y = (90.0 - lat) / 180.0 * h
 
         return qtc.QPointF(x, y)
-    
-    def highlight_country(self, country_name, color=qtg.QColor("green")):
-        self.highlighted[country_name.casefold()] = color
-        self.repaint()
 
-    def clear_highlight(self, country_name):
-        self.highlighted.pop(country_name.casefold(), None)
-        self.update()
+    def draw_polygon(self, painter, polygon, fill=False):
+
+        path = qtg.QPainterPath()
+
+        for ring in polygon:
+
+            qpoly = qtg.QPolygonF(
+                [self.project(lon, lat) for lon, lat in ring]
+            )
+
+            path.addPolygon(qpoly)
+    
+        if fill:
+            painter.fillPath(path, qtg.QColor("green"))
+
+        painter.drawPath(path)
+
 
     def paintEvent(self, event):
         painter = qtg.QPainter(self)
@@ -62,11 +77,9 @@ class WorldMapWidget(qtw.QWidget):
         for feature in self.geojson["features"]:
 
             props = feature["properties"]
-
-            # Natural Earth usually has one of these
             name = props.get("name")
 
-            fill = self.highlighted.get(name.casefold()) if name else None
+            fill = name in self.highlighted
 
             geom = feature["geometry"]
 
@@ -76,26 +89,6 @@ class WorldMapWidget(qtw.QWidget):
             elif geom["type"] == "MultiPolygon":
                 for poly in geom["coordinates"]:
                     self.draw_polygon(painter, poly, fill)
-
-    def draw_polygon(self, painter, polygon, fill_color=None):
-
-        path = qtg.QPainterPath()
-
-        for ring in polygon:
-
-            qpoly = qtg.QPolygonF(
-                [self.project(lon, lat) for lon, lat in ring]
-            )
-
-            path.addPolygon(qpoly)
-    
-        if fill_color is not None:
-            painter.fillPath(path, fill_color)
-
-        painter.drawPath(path)
-
-
-
 
 class WCQ(qtw.QWidget):
 
