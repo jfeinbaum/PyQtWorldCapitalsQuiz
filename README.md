@@ -11,5 +11,5 @@ Instructions:
   5. To recreate the database, run `python3 init_db.py`. Only do this if you want to reset the times to 0.
  
 
- ![](game_screenshot.png)
+ ![](screenshot.png)
 
