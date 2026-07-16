@@ -1,9 +1,7 @@
 # World Capitals Quiz
 ## created by Jake Feinbaum
   
-A quiz to name all the world capitals, built with PyQt5 and SQLite3.
-
-![](game_screenshot.png)
+A timed quiz to name all the world capitals, built with PyQt5 and SQLite3.
 
 Instructions:
   1. Install PyQt5 if needed with `pip install PyQt5`.
@@ -12,4 +10,6 @@ Instructions:
   4. Guess the capital cities until the entire map is filled. You can skip countries, pause and unpause, or give up to end the game early. The database will keep track of the average time elapsed for each country.
   5. To recreate the database, run `python3 init_db.py`. Only do this if you want to reset the times to 0.
  
+
+ ![](game_screenshot.png)
 
