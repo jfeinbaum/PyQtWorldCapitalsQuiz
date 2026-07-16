@@ -8,6 +8,76 @@ from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 from init_db import DB_NAME
+from pathlib import Path
+
+'''
+START WORK
+'''
+
+import json
+
+
+MAP_PATH = Path('world_map.json')
+
+
+
+class WorldMapWidget(qtw.QWidget):
+
+    def __init__(self, geojson_path, parent=None):
+        super().__init__(parent)
+
+        with open(geojson_path, encoding="utf-8") as f:
+            self.geojson = json.load(f)
+
+        self.setMinimumSize(800, 400)
+
+    
+
+
+    def project(self, lon, lat):
+        w = self.width()
+        h = self.height()
+
+        x = (lon + 180.0) / 360.0 * w
+        y = (90.0 - lat) / 180.0 * h
+
+        return qtc.QPointF(x, y)
+
+
+
+    def paintEvent(self, event):
+        painter = qtg.QPainter(self)
+
+        painter.fillRect(self.rect(), qtc.Qt.white)
+
+        pen = qtg.QPen(qtc.Qt.black)
+        pen.setWidth(1)
+
+        painter.setPen(pen)
+
+        for feature in self.geojson["features"]:
+
+            geom = feature["geometry"]
+
+            if geom["type"] == "Polygon":
+                self.draw_polygon(painter, geom["coordinates"])
+
+            elif geom["type"] == "MultiPolygon":
+                for poly in geom["coordinates"]:
+                    self.draw_polygon(painter, poly)
+
+    def draw_polygon(self, painter, polygon):
+
+        for ring in polygon:
+
+            pts = [self.project(lon, lat) for lon, lat in ring]
+
+            for a, b in zip(pts, pts[1:]):
+                painter.drawLine(a, b)
+
+'''
+END WORK
+'''
 
 
 class WCQ(qtw.QWidget):
@@ -71,6 +141,8 @@ class WCQ(qtw.QWidget):
         self.line_input.setFont(qtg.QFont('Arial', 12))
         self.line_input.textChanged.connect(self.handle_input)
 
+        self.map_widget = WorldMapWidget(MAP_PATH)
+
         self.table = qtw.QTableWidget(len(self.countries), 4)
         self.table.setColumnWidth(0, 200)
         self.table.setColumnWidth(1, 150)
@@ -95,6 +167,7 @@ class WCQ(qtw.QWidget):
         layout.addLayout(self.stats_layout)
         layout.addLayout(self.interactive_layout)
         layout.addWidget(self.line_input)
+        layout.addWidget(self.map_widget)
         layout.addWidget(self.table)
         self.setLayout(layout)
 
