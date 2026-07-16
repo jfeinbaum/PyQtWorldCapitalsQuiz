@@ -10,10 +10,6 @@ from PyQt5 import QtGui as qtg
 from init_db import DB_NAME
 from pathlib import Path
 
-'''
-START WORK
-'''
-
 import json
 
 
@@ -25,6 +21,8 @@ class WorldMapWidget(qtw.QWidget):
 
     def __init__(self, geojson_path, parent=None):
         super().__init__(parent)
+
+        self.highlighted = {}  # country name -> QColor
 
         with open(geojson_path, encoding="utf-8") as f:
             self.geojson = json.load(f)
@@ -42,8 +40,14 @@ class WorldMapWidget(qtw.QWidget):
         y = (90.0 - lat) / 180.0 * h
 
         return qtc.QPointF(x, y)
+    
+    def highlight_country(self, country_name, color=qtg.QColor("green")):
+        self.highlighted[country_name.casefold()] = color
+        self.repaint()
 
-
+    def clear_highlight(self, country_name):
+        self.highlighted.pop(country_name.casefold(), None)
+        self.update()
 
     def paintEvent(self, event):
         painter = qtg.QPainter(self)
@@ -57,27 +61,40 @@ class WorldMapWidget(qtw.QWidget):
 
         for feature in self.geojson["features"]:
 
+            props = feature["properties"]
+
+            # Natural Earth usually has one of these
+            name = props.get("name")
+
+            fill = self.highlighted.get(name.casefold()) if name else None
+
             geom = feature["geometry"]
 
             if geom["type"] == "Polygon":
-                self.draw_polygon(painter, geom["coordinates"])
+                self.draw_polygon(painter, geom["coordinates"], fill)
 
             elif geom["type"] == "MultiPolygon":
                 for poly in geom["coordinates"]:
-                    self.draw_polygon(painter, poly)
+                    self.draw_polygon(painter, poly, fill)
 
-    def draw_polygon(self, painter, polygon):
+    def draw_polygon(self, painter, polygon, fill_color=None):
+
+        path = qtg.QPainterPath()
 
         for ring in polygon:
 
-            pts = [self.project(lon, lat) for lon, lat in ring]
+            qpoly = qtg.QPolygonF(
+                [self.project(lon, lat) for lon, lat in ring]
+            )
 
-            for a, b in zip(pts, pts[1:]):
-                painter.drawLine(a, b)
+            path.addPolygon(qpoly)
+    
+        if fill_color is not None:
+            painter.fillPath(path, fill_color)
 
-'''
-END WORK
-'''
+        painter.drawPath(path)
+
+
 
 
 class WCQ(qtw.QWidget):
@@ -187,6 +204,8 @@ class WCQ(qtw.QWidget):
 
         allowed_capitals = self.db.allowed_capitals_from_country(country)
         if guess in [cap.lower() for cap in allowed_capitals]:
+
+            self.map_widget.highlight_country(country)
 
             elapsed_time = time() - self.resume_ts
             self.elapsed_time += elapsed_time
