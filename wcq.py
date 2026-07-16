@@ -3,6 +3,7 @@ import sqlite3
 import subprocess
 import random
 import os
+import json
 from time import time
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
@@ -10,13 +11,7 @@ from PyQt5 import QtGui as qtg
 from init_db import DB_NAME
 from pathlib import Path
 
-import json
-
-
 MAP_PATH = Path('world_map.json')
-
-
-
 
 
 class WorldMapWidget(qtw.QWidget):
@@ -77,11 +72,6 @@ class WorldMapWidget(qtw.QWidget):
                 self.draw_polygon(painter, poly, fill)
 
 
-    
-
-
-
-
 
 
 class WCQ(qtw.QWidget):
@@ -95,19 +85,7 @@ class WCQ(qtw.QWidget):
 
         self.geojson = {}
         with open(MAP_PATH, encoding="utf-8") as f:
-            geojson = json.load(f)
-            for feature in geojson["features"]:
-                props = feature["properties"]
-                name = props.get("name")
-                geom = feature["geometry"]
-                coords = geom["coordinates"]
-                if name not in self.countries:
-                    print(name)
-                    continue
-                if geom["type"] == "Polygon":
-                    self.geojson[name] = [coords]
-                elif geom["type"] == "MultiPolygon":
-                    self.geojson[name] = [poly for poly in coords]
+            self.geojson = json.load(f)
 
         self.avg_times = self.db.all_countries_and_times()
 

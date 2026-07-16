@@ -1,5 +1,6 @@
 __pycache__/
 *.db
+*.db-journal
 .idea/*.xml
 .idea/*.iml
 .idea/
