@@ -17,21 +17,18 @@ MAP_PATH = Path('world_map.json')
 
 
 
+
+
 class WorldMapWidget(qtw.QWidget):
 
-    def __init__(self, geojson_path, parent=None):
+    def __init__(self, geojson, parent=None):
         super().__init__(parent)
-
-        self.highlighted = []
-
-        with open(geojson_path, encoding="utf-8") as f:
-            self.geojson = json.load(f)
-
         self.setMinimumSize(800, 400)
+        self.geojson = geojson
+        self.highlighted = []
+        
 
-
-
-    
+   
     def highlight_country(self, country_name):
         self.highlighted.append(country_name)
         self.update()
@@ -74,21 +71,18 @@ class WorldMapWidget(qtw.QWidget):
 
         painter.setPen(pen)
 
-        for feature in self.geojson["features"]:
-
-            props = feature["properties"]
-            name = props.get("name")
-
+        for name, geom in self.geojson.items():
             fill = name in self.highlighted
+            for poly in geom:
+                self.draw_polygon(painter, poly, fill)
 
-            geom = feature["geometry"]
 
-            if geom["type"] == "Polygon":
-                self.draw_polygon(painter, geom["coordinates"], fill)
+    
 
-            elif geom["type"] == "MultiPolygon":
-                for poly in geom["coordinates"]:
-                    self.draw_polygon(painter, poly, fill)
+
+
+
+
 
 class WCQ(qtw.QWidget):
 
@@ -98,6 +92,23 @@ class WCQ(qtw.QWidget):
 
         self.db = DB()
         self.countries = self.db.countries()
+
+        self.geojson = {}
+        with open(MAP_PATH, encoding="utf-8") as f:
+            geojson = json.load(f)
+            for feature in geojson["features"]:
+                props = feature["properties"]
+                name = props.get("name")
+                geom = feature["geometry"]
+                coords = geom["coordinates"]
+                if name not in self.countries:
+                    print(name)
+                    continue
+                if geom["type"] == "Polygon":
+                    self.geojson[name] = [coords]
+                elif geom["type"] == "MultiPolygon":
+                    self.geojson[name] = [poly for poly in coords]
+
         self.avg_times = self.db.all_countries_and_times()
 
         self.countries_remaining = self.countries[:]
@@ -152,7 +163,7 @@ class WCQ(qtw.QWidget):
         self.line_input.setFont(qtg.QFont('Arial', 12))
         self.line_input.textChanged.connect(self.handle_input)
 
-        self.map_widget = WorldMapWidget(MAP_PATH)
+        self.map_widget = WorldMapWidget(self.geojson)
 
         self.table = qtw.QTableWidget(len(self.countries), 4)
         self.table.setColumnWidth(0, 200)
