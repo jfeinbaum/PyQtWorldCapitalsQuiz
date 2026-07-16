@@ -52,6 +52,8 @@ class WorldMapWidget(qtw.QWidget):
     
         if fill:
             painter.fillPath(path, qtg.QColor("green"))
+        else:
+            painter.fillPath(path, qtg.QColor("white"))
 
         painter.drawPath(path)
 
@@ -59,9 +61,9 @@ class WorldMapWidget(qtw.QWidget):
     def paintEvent(self, event):
         painter = qtg.QPainter(self)
 
-        painter.fillRect(self.rect(), qtc.Qt.white)
+        painter.fillRect(self.rect(), qtg.QColor("lightblue"))
 
-        pen = qtg.QPen(qtc.Qt.black)
+        pen = qtg.QPen(qtg.QColor("black"))
         pen.setWidth(1)
 
         painter.setPen(pen)
