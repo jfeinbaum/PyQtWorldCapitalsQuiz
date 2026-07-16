@@ -102,6 +102,7 @@ class WCQ(qtw.QWidget):
 
         self.countries_remaining = self.countries[:]
         self.current_elapsed_times = {}
+        self.guessed = []
 
         self.elapsed_time = 0
         self.paused_elapsed_time = 0
@@ -160,12 +161,7 @@ class WCQ(qtw.QWidget):
         self.table.setColumnWidth(3, 75)
 
         self.table.setHorizontalHeaderLabels(['Country', 'Capital', 'Time', 'Avg. Time'])
-        self.table.setVerticalHeaderLabels(['' for _ in self.countries])
-        for i, country in enumerate(self.countries):
-            self.fill_cell(i, 0, country)
-            self.fill_cell(i, 1, '')
-            self.fill_cell(i, 2, '')
-            self.fill_cell(i, 3, '')
+        self.table.setVerticalHeaderLabels([str(i+1)+'.' for i in range(len(self.countries))])
 
         self.interactive_layout = qtw.QHBoxLayout()
         self.interactive_layout.addWidget(self.country_label)
@@ -206,10 +202,13 @@ class WCQ(qtw.QWidget):
             new_time = (old_time + self.elapsed_time) / 2
             self.db.update_country_time(country, new_time)
 
-            row_index = self.countries.index(country)
             capital = self.db.capital_from_country(country)
-            self.fill_cell(row_index, 1, capital)
             self.countries_remaining.remove(country)
+            self.guessed.append(country)
+            row_index = len(self.guessed) - 1
+            self.fill_cell(row_index, 0, country)
+            self.fill_cell(row_index, 1, capital)
+
 
             self.current_elapsed_times[capital] = self.elapsed_time
             avg_time = self.avg_times[country]
@@ -267,8 +266,15 @@ class WCQ(qtw.QWidget):
             self.game_paused = False
 
     def end_game(self):
-
-        for row_index, country in enumerate(self.countries):
+        countries_displayed = self.guessed
+        for country in self.countries:
+            if country in self.guessed:
+                continue
+            row_index = len(countries_displayed)
+            countries_displayed.append(country)
+            self.fill_cell(row_index, 0, country)
+            capital = self.db.capital_from_country(country)
+            self.fill_cell(row_index, 1, capital)
             avg_time = self.db.get_country_time(country)
             self.fill_cell(row_index, 3, str(round(avg_time, 3)))
 
@@ -303,12 +309,6 @@ class WCQ(qtw.QWidget):
 
     def give_up(self):
         self.country_label.setText('Game Over')
-        for row_index, country in enumerate(self.countries):
-            capital = self.db.capital_from_country(country)
-            capital_cell = qtw.QTableWidgetItem(capital)
-            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsEditable)
-            capital_cell.setFlags(capital_cell.flags() & ~qtc.Qt.ItemIsSelectable)
-            self.table.setItem(row_index, 1, capital_cell)
         self.end_game()
 
 
